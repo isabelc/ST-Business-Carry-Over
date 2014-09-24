@@ -26,7 +26,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /*
-@todo update all textdomain of 'st-business-carry-over-legacy' to 'st-business-carry-over-legacy'
+
+
+
+@todo update all textdomain of 'st-business-carry-over' to 'st-business-carry-over-legacy'
+@todo use old reviews menu page.
+
+@todo change all stbco to stbcol so as not to clash with other plugin.
+
+
+update constant for path everywhere (STBUSINESSCARRYOVER_PATH). @todo
+
+update textdomain everywhere @todo
 
 */
 class ST_Business_Carry_Over_Legacy{
@@ -41,8 +52,8 @@ class ST_Business_Carry_Over_Legacy{
 
 	private function __construct() {
 		
-		if( ! defined('STBUSINESSCARRYOVER_PATH')) {
-			define( 'STBUSINESSCARRYOVER_PATH', plugin_dir_path(__FILE__) );
+		if( ! defined('STBUSCARRYOVERLEGACY_PATH')) {
+			define( 'STBUSCARRYOVERLEGACY_PATH', plugin_dir_path(__FILE__) );
 		}
 
 		// Registers custom taxonomy for services
@@ -105,7 +116,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		load_plugin_textdomain( 'st-business-carry-over-legacy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		
-		include STBUSINESSCARRYOVER_PATH . 'options.php';
+		include STBUSCARRYOVERLEGACY_PATH . 'options.php';
 		add_action( 'init', 'stbco_options' );
 	}
 	
@@ -395,7 +406,7 @@ class ST_Business_Carry_Over_Legacy{
 		$reviews = empty($options['st_add_reviews']) ? '' : $options['st_add_reviews'];
 	
 		if (!class_exists('Smartest_Themes_Reviews') && ($reviews == 'true')) {
-			include_once STBUSINESSCARRYOVER_PATH . 'reviews/reviews.php';
+			include_once STBUSCARRYOVERLEGACY_PATH . 'reviews/reviews.php';
 		}
 		
 		if ( $reviews == 'true' ) {
@@ -607,7 +618,7 @@ class ST_Business_Carry_Over_Legacy{
 	 */
 	function init_meta_boxes() {
 		if ( ! class_exists( 'stbco_Meta_Box' ) )
-			require_once STBUSINESSCARRYOVER_PATH . 'metabox/init.php';
+			require_once STBUSCARRYOVERLEGACY_PATH . 'metabox/init.php';
 	}
 	
 	/**
@@ -636,8 +647,8 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if( $news == 'true'  ) { 
 		
-			include STBUSINESSCARRYOVER_PATH . 'widgets/announcements.php';
-			include STBUSINESSCARRYOVER_PATH . 'widgets/featured-announcements.php';
+			include STBUSCARRYOVERLEGACY_PATH . 'widgets/announcements.php';
+			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-announcements.php';
 		
 			register_widget('SmartestAnnouncements');
 			register_widget('SmartestFeaturedAnnounce');
@@ -645,8 +656,8 @@ class ST_Business_Carry_Over_Legacy{
 		}
 		if( $svcs == 'true'  ) { 
 		
-			include STBUSINESSCARRYOVER_PATH . 'widgets/all-services.php';
-			include STBUSINESSCARRYOVER_PATH . 'widgets/featured-services.php';		
+			include STBUSCARRYOVERLEGACY_PATH . 'widgets/all-services.php';
+			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-services.php';		
 		
 			register_widget('SmartestServices'); 
 			register_widget('SmartestFeaturedServices');
@@ -654,7 +665,7 @@ class ST_Business_Carry_Over_Legacy{
 		}
 		if( $staff == 'true' ) {
 		
-			include STBUSINESSCARRYOVER_PATH . 'widgets/staff.php';
+			include STBUSCARRYOVERLEGACY_PATH . 'widgets/staff.php';
 			register_widget('SmartestStaff');
 		
 		}
