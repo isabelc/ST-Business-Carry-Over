@@ -1,14 +1,11 @@
 <?php
 /**
 
-@todo see how options are gotten here. remove all but the necessary ones. 
-
-@todo make sure option names use old names, not new ones.
+@todo bring in aggregate widget maybe??
 
 
  * Get reviews from visitors, and aggregate ratings and stars for your business in search results.
- * 
- *  Adds Microdata markup (Schema.org) for rich snippets. Includes Testimonial widget. Optional: pulls aggregaterating to home page. Option to not pull it to home page, and just have a reviews page. Requires Smartest Themes for full functionality.
+ * Includes Testimonial widget. 
  * 
  * @package		ST Business Carry Over Legacy
  * @subpackage	Smartest Reviews Module
@@ -18,7 +15,6 @@
 class SMARTESTReviewsLegacy {
 
 	var $dbtable = 'smareviewsb';
-	var $force_active_page = false;
 	var $got_aggregate = false;
 	var $options = array();
 	var $p = '';
@@ -37,17 +33,16 @@ class SMARTESTReviewsLegacy {
 		
 		$plugin_data = get_option('stbcol_smartestb_plugin_version');
 		
-        add_action('the_content', array(&$this, 'do_the_content'), 10); /* prio 10 prevents a conflict with some odd themes */
-        add_action('init', array(&$this, 'init'));
-        add_action('admin_init', array(&$this, 'admin_init'));
-		add_action( 'widgets_init', array(&$this, 'register_widget'));
-		add_action('template_redirect',array(&$this, 'template_redirect')); /* handle redirects and form posts, and add style/script if needed */
-	    add_action('admin_menu', array(&$this, 'addmenu'));
-        add_action('wp_ajax_update_field', array(&$this, 'admin_view_reviews'));
-	    add_action('save_post', array(&$this, 'admin_save_post'), 10, 2);
-		add_action( 'admin_init', array(&$this, 'create_reviews_page'));//isa, admin_init in frame but for stand-alone plugin hook to after_setup_theme
-		add_action('wp_enqueue_scripts', array(&$this, 'enqueue_scripts'));
-		add_action('admin_enqueue_scripts', array(&$this, 'admin_scripts'));
+        add_action( 'init', array( $this, 'init' ) );
+        add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'widgets_init', array( $this, 'register_widget' ) );
+		add_action( 'template_redirect', array( $this, 'template_redirect' ) ); /* handle redirects and form posts, and add style/script if needed */
+	    add_action( 'admin_menu', array( $this, 'addmenu' ) );
+        add_action( 'wp_ajax_update_field', array( $this, 'admin_view_reviews' ) );
+	    add_action( 'save_post', array( $this, 'admin_save_post' ), 10, 2 );
+		add_action( 'admin_init', array( $this, 'create_reviews_page'));//isa, admin_init in frame but for stand-alone plugin hook to after_setup_theme
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
     }
 
     function addmenu() {
@@ -101,7 +96,7 @@ class SMARTESTReviewsLegacy {
             'reviews_per_page' => 10,
             'show_custom' => array(),
             'show_fields' => array('fname' => 1, 'femail' => 0, 'fwebsite' => 0, 'ftitle' => 1, 'fage' => 0, 'fgender' => 0),
-            'show_hcard_on' => 1, 'biz_declare' => 1,
+			'biz_declare' => 1,
             'submit_button_text' => __('Submit your review', 'st-business-carry-over-legacy'),
             'title_tag' => 'h2'
         );
@@ -187,20 +182,6 @@ class SMARTESTReviewsLegacy {
         return false;
     }
 
-    function is_active_page() {
-        global $post;
-        $has_shortcode = $this->force_active_page;
-        if ( $has_shortcode !== false ) {
-            return 'shortcode';
-        }
-        if ( !isset($post) || !isset($post->ID) || intval($post->ID) == 0 ) {
-            return false; /* we can only use if we have a valid post ID */
-        }
-        if (!is_singular()) {
-            return false; /* not on a single post/page view */
-        }
-        return false;
-    }
 	function template_redirect() {
 		/* do this in template_redirect so we can try to redirect cleanly */
         global $post;
@@ -290,7 +271,12 @@ class SMARTESTReviewsLegacy {
     }
 
 	
-	/* @todo do we need this for legacy?? */
+	/*
+
+@test remove this function but 1st see if aggregate appears below reviews on reviews page.
+
+
+
     function aggregate_footer() {// for home page
 		global $smartestb_options;	
 		// gather agg data
@@ -302,13 +288,15 @@ class SMARTESTReviewsLegacy {
         $best_score = 5;
         $average_score = number_format($this->got_aggregate["aggregate"], 1);
 	    $aggregate_footer_output = '';
-		/* only if set to agg Business ratings on front page and is front page & if home page is static then show. */
+		
+		// only if set to agg Business ratings on front page and is front page & if home page is static then show.
+		
 		if ( ($this->options['show_hcard_on'] == 1) && is_front_page() && (get_option('show_on_front') == 'page') ) {
 						$show = true;
 					}
 else {$show = false; }
 
-       	if ($show) { /* we append like this to prevent newlines and wpautop issues */
+       	if ($show) { // we append like this to prevent newlines and wpautop issues
 
 				// if set to declare business schema type, do it
             	if ( $this->options['biz_declare'] == 1 ) {
@@ -375,7 +363,11 @@ $smartestb_options = get_option('smartestb_options');
             
 			}// end if $show
 		        return $aggregate_footer_output;
-    }
+    } // end aggregate_footer()
+	
+	*/
+	
+	
     function iso8601($time=false) {
         if ($time === false)
             $time = time();
@@ -637,32 +629,19 @@ function create_reviews_page() {
 	}
 
 }
-function do_the_content($original_content) {
-        global $post;
+function shortcode_smar_insert() {
+		global $post;
+
+		$using_shortcode_insert = true;
         
-        $using_shortcode_insert = false;
-        if ($original_content == 'shortcode_insert') {
-            $original_content = '';
-            $using_shortcode_insert = true;
-        }
-        
-        $the_content = '';
-        $is_active_page = $this->is_active_page();
-        
-        /* return normal content if this is not an enabled page, or if this is a post not on single post view */
-        if (!$is_active_page) {/* 12.13 think this is inserted into post with no wrap */
-           $the_content .= $this->aggregate_footer(); /* check if we need to show something in the footer then */
-            return $original_content . $the_content;
-        }
-        
-        $the_content .= '<div id="smar_respond_1"><!-- do the content -->'; /* start the div */
+        $the_content = '<div id="smar_respond_1"><!-- do the content -->'; /* start the div */
         $inside_div = true;
        
         if ($this->options['form_location'] == 0) {
             $the_content .= $this->show_reviews_form();
         }
 
-	        $ret_Arr = $this->output_reviews_show( $inside_div, $post->ID, $this->options['reviews_per_page'], -1 );
+		$ret_Arr = $this->output_reviews_show( $inside_div, $post->ID, $this->options['reviews_per_page'], -1 );
 
 	      
 
@@ -676,13 +655,19 @@ function do_the_content($original_content) {
             $the_content .= $this->show_reviews_form();
         }
         
+		
+		/*
+		// @test remove but see if reviews page still has aggregate on bottom
         $the_content .= $this->aggregate_footer(); /* check if we need to show something in the footer also */
-        
+        */
+		
+		
+		
         $the_content .= '</div><!-- do the content -->'; /* smar_respond_1 */
 
         $the_content = preg_replace('/\n\r|\r\n|\n|\r|\t/', '', $the_content); /* minify to prevent automatic line breaks, not removing double spaces */
 
-        return $original_content . $the_content;
+        return $the_content;
 }
 
     function output_rating($rating, $enable_hover) {
@@ -1021,11 +1006,7 @@ function do_the_content($original_content) {
         $this->page = intval($this->p->smarp);
         if ($this->page < 1) { $this->page = 1; }
         
-        add_shortcode( 'SMAR_INSERT', array(&$this, 'shortcode_smar_insert') );
-    }
-    function shortcode_smar_insert() {
-        $this->force_active_page = 1;
-        return $this->do_the_content('shortcode_insert');        
+        add_shortcode( 'SMAR_INSERT', array( $this, 'shortcode_smar_insert' ) );
     }
 
 	function enqueue_scripts() {

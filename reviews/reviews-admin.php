@@ -184,14 +184,13 @@ class SMARTESTReviewsLegacyAdmin
             
             /* prevent E_NOTICE warnings */
             if (!isset($this->p->goto_show_button)) { $this->p->goto_show_button = 0; }
-            if (!isset($this->p->show_hcard_on)) { $this->p->show_hcard_on = 0; }
             if (!isset($this->p->biz_declare)) { $this->p->biz_declare = 0; }
 
             /* some int validation */
             $updated_options['form_location'] = intval($this->p->form_location);
             $updated_options['goto_show_button'] = intval($this->p->goto_show_button);
             $updated_options['reviews_per_page'] = intval($this->p->reviews_per_page);
-            $updated_options['show_hcard_on'] = intval($this->p->show_hcard_on);
+            
             $updated_options['biz_declare'] = intval($this->p->biz_declare);
             
             if ($updated_options['reviews_per_page'] < 1) { $updated_options['reviews_per_page'] = 10; }
@@ -204,10 +203,6 @@ class SMARTESTReviewsLegacyAdmin
     }
 
     function show_options() {
-        $su_checked = '';
-        if ($this->options['show_hcard_on']) {
-            $su_checked = 'checked';
-        } 
 
         $bizdeclare_checked = '';
         if ($this->options['biz_declare']) {
@@ -241,15 +236,22 @@ class SMARTESTReviewsLegacyAdmin
         <div class="postbox" style="width:700px;"><h3>'. __('Display Options', 'st-business-carry-over-legacy') .'</h3><div id="smar_ad">
                <form method="post" action=""><div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;">
                         <legend>'. __('General Settings', 'st-business-carry-over-legacy').'</legend>
-                    </div>                    
-<div style="padding:10px;"><input id="show_hcard_on" name="show_hcard_on" type="checkbox" '.$su_checked.' value="1" />&nbsp;
-<label for="show_hcard_on">'. __('Enable Aggregate Rating on Home Page.', 'st-business-carry-over-legacy').'</label>
-<br /><br /> <small>'. __('This will pull data from your Reviews page, then add `aggregateRating` Schema.org Microdata to your home page.', 'st-business-carry-over-legacy'). '</small><br /><br /><input id="biz_declare" name="biz_declare" type="checkbox" '.$bizdeclare_checked.' value="1" />&nbsp;
+                    </div>       
+
+					
+<div style="padding:10px;">
+
+
+<br /><br />
+
+<input id="biz_declare" name="biz_declare" type="checkbox" '.$bizdeclare_checked.' value="1" />&nbsp;
 <label for="biz_declare">'. __('Declare LocalBusiness Type Microdata on Home page.', 'st-business-carry-over-legacy').'</label>
                         <br /><br />
                         <small>'. __('Add Schema.org LocalBusiness type declaration on home page. Don\'t check this if you added your own Microdata type and you only want to add on the aggregate rating.', 'st-business-carry-over-legacy').'</small><br />
                         <div class="submit" style="padding:10px 0px 0px 0px;"><input type="submit" class="button-primary" value="'. __('Save Changes', 'st-business-carry-over-legacy') .'" name="Submit"></div>
-</div>         <div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"><legend>'. __('Review Page Settings', 'st-business-carry-over-legacy'). '</legend></div>
+</div>         
+
+<div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"><legend>'. __('Review Page Settings', 'st-business-carry-over-legacy'). '</legend></div>
                     <div style="padding:10px;padding-bottom:10px;"><label for="reviews_per_page">'. __('Reviews shown per page: ', 'st-business-carry-over-legacy') . '</label><input style="width:40px;" type="text" id="reviews_per_page" name="reviews_per_page" value="'.$this->options['reviews_per_page'].'" />
                         <br /><br />
                         <label for="form_location">'. __('Location of Review Form: ', 'st-business-carry-over-legacy'). '</label>
@@ -379,8 +381,8 @@ class SMARTESTReviewsLegacyAdmin
             <div class="postbox" style="width:700px;">
                 <h3 style="cursor:default;">'. __('About Smartest Reviews', 'st-business-carry-over-legacy'). '</h3>
                 <div style="padding:10px; background:#ffffff;">
-                    <p>'. __('Smartest Reviews allows your customers and visitors to leave reviews or testimonials of your business. It also enables cross-page aggregate ratings. This pulls aggregate ratings data from the Reviews page into your home page to create rich snippets for search engines on your home page and your Reviews page. Reviews are Schema.org Microdata enabled.', 'st-business-carry-over-legacy'). '<br /><br />'
-					. sprintf(__('Activate Reviews by checking %s in %s.', 'st-business-carry-over-legacy'), '<code>Add Reviews Section</code>', $linkp).
+                    <p>'. __('Smartest Reviews allows your customers and visitors to leave reviews or testimonials of your business. Reviews are Schema.org Microdata enabled.', 'st-business-carry-over-legacy'). '<br /><br />'
+					. sprintf(__('Activate Reviews by checking %s in the ST Business Carry Over settings.', 'st-business-carry-over-legacy'), '<code>Enable Reviews</code>' ).
 '</p><br /> </div> </div>';
         $this->show_options();
         echo '<br /></div>';
