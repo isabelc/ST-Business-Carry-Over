@@ -184,14 +184,11 @@ class SMARTESTReviewsLegacyAdmin
             
             /* prevent E_NOTICE warnings */
             if (!isset($this->p->goto_show_button)) { $this->p->goto_show_button = 0; }
-            if (!isset($this->p->biz_declare)) { $this->p->biz_declare = 0; }
 
             /* some int validation */
             $updated_options['form_location'] = intval($this->p->form_location);
             $updated_options['goto_show_button'] = intval($this->p->goto_show_button);
             $updated_options['reviews_per_page'] = intval($this->p->reviews_per_page);
-            
-            $updated_options['biz_declare'] = intval($this->p->biz_declare);
             
             if ($updated_options['reviews_per_page'] < 1) { $updated_options['reviews_per_page'] = 10; }
             $msg .= 'Your settings have been saved.';
@@ -204,11 +201,6 @@ class SMARTESTReviewsLegacyAdmin
 
     function show_options() {
 
-        $bizdeclare_checked = '';
-        if ($this->options['biz_declare']) {
-            $bizdeclare_checked = 'checked';
-        }
-        
         $goto_show_button_checked = '';
         if ($this->options['goto_show_button']) {
             $goto_show_button_checked = 'checked';
@@ -234,24 +226,8 @@ class SMARTESTReviewsLegacyAdmin
         
         echo '
         <div class="postbox" style="width:700px;"><h3>'. __('Display Options', 'st-business-carry-over-legacy') .'</h3><div id="smar_ad">
-               <form method="post" action=""><div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;">
-                        <legend>'. __('General Settings', 'st-business-carry-over-legacy').'</legend>
-                    </div>       
-
-					
-<div style="padding:10px;">
-
-
-<br /><br />
-
-<input id="biz_declare" name="biz_declare" type="checkbox" '.$bizdeclare_checked.' value="1" />&nbsp;
-<label for="biz_declare">'. __('Declare LocalBusiness Type Microdata on Home page.', 'st-business-carry-over-legacy').'</label>
-                        <br /><br />
-                        <small>'. __('Add Schema.org LocalBusiness type declaration on home page. Don\'t check this if you added your own Microdata type and you only want to add on the aggregate rating.', 'st-business-carry-over-legacy').'</small><br />
-                        <div class="submit" style="padding:10px 0px 0px 0px;"><input type="submit" class="button-primary" value="'. __('Save Changes', 'st-business-carry-over-legacy') .'" name="Submit"></div>
-</div>         
-
-<div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"><legend>'. __('Review Page Settings', 'st-business-carry-over-legacy'). '</legend></div>
+               <form method="post" action="">
+			   <div style="background:#eaf2fa;padding:6px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;"><legend>'. __('Review Page Settings', 'st-business-carry-over-legacy'). '</legend></div>
                     <div style="padding:10px;padding-bottom:10px;"><label for="reviews_per_page">'. __('Reviews shown per page: ', 'st-business-carry-over-legacy') . '</label><input style="width:40px;" type="text" id="reviews_per_page" name="reviews_per_page" value="'.$this->options['reviews_per_page'].'" />
                         <br /><br />
                         <label for="form_location">'. __('Location of Review Form: ', 'st-business-carry-over-legacy'). '</label>

@@ -96,7 +96,6 @@ class SMARTESTReviewsLegacy {
             'reviews_per_page' => 10,
             'show_custom' => array(),
             'show_fields' => array('fname' => 1, 'femail' => 0, 'fwebsite' => 0, 'ftitle' => 1, 'fage' => 0, 'fgender' => 0),
-			'biz_declare' => 1,
             'submit_button_text' => __('Submit your review', 'st-business-carry-over-legacy'),
             'title_tag' => 'h2'
         );
