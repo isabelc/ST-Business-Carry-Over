@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: ST Business Carry Over Legacy
-Plugin URI: @todo
+Plugin URI: https://smartestthemes.com/docs/category/st-business-carry-over-legacy-wordpress-plugin/
 Description: Carry over your staff, announcements, services, and reviews from your Legacy Smartest Themes to any WordPress theme.
 Version: 1.0-alpha-2
 Author: Smartest Themes
