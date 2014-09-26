@@ -27,14 +27,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 /*
 
-
 @todo final checklist:
 @todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'quick-business-website'... to 'st-business-carry-over-legacy'
-
-
-
-@todo use old reviews menu page.
-
 
 */
 

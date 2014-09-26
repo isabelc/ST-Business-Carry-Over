@@ -1,6 +1,5 @@
 <?php
-/** @todo update these notes in all reviews module with the new name of the legacy plugin
-
+/**
  * Smartest Reviews Admin Interface
  * 
  * @package		ST Business Carry Over Legacy
