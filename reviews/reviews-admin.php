@@ -3,14 +3,14 @@
 
  * Smartest Reviews Admin Interface
  * 
- * @package		Quick Business Website
+ * @package		ST Business Carry Over Legacy
  * @subpackage	Smartest Reviews Module
  * @author		Smartest Themes <isa@smartestthemes.com>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  */
-class SMARTESTReviewsBusinessAdmin
+class SMARTESTReviewsLegacyAdmin
 {	var $parentClass = '';
-	function SMARTESTReviewsBusinessAdmin($parentClass) {
+	function SMARTESTReviewsLegacyAdmin($parentClass) {
             define('IN_SMAR_ADMIN',1);
             
             $this->parentClass = &$parentClass;
@@ -777,7 +777,7 @@ class SMARTESTReviewsBusinessAdmin
     }
 }
 if (!defined('IN_SMAR_ADMIN')) {
-    global $SMARTESTReviewsBusiness, $SMARTESTReviewsBusinessAdmin;
-    $SMARTESTReviewsBusinessAdmin = new SMARTESTReviewsBusinessAdmin($SMARTESTReviewsBusiness);
+    global $SMARTESTReviewsLegacy, $SMARTESTReviewsLegacyAdmin;
+    $SMARTESTReviewsLegacyAdmin = new SMARTESTReviewsLegacyAdmin($SMARTESTReviewsLegacy);
 }
 ?>

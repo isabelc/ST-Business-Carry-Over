@@ -3,7 +3,7 @@
 Plugin Name: ST Business Carry Over Legacy
 Plugin URI: @todo
 Description: Carry over your staff, announcements, services, and reviews from your Legacy Smartest Themes to any WordPress theme.
-Version: 1.0-alpha-1
+Version: 1.0-alpha-2
 Author: Smartest Themes
 Author URI: http://smartestthemes.com
 License: GPL2
@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 @todo final checklist:
-@todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'st-business-carry-over-legacy'... to 'st-business-carry-over-legacy'
+@todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'quick-business-website'... to 'st-business-carry-over-legacy'
 
 
 
@@ -403,7 +403,7 @@ class ST_Business_Carry_Over_Legacy{
 		$options = get_option('smartestthemes_options');
 		$reviews = empty($options['st_add_reviews']) ? '' : $options['st_add_reviews'];
 	
-		if (!class_exists('Smartest_Themes_Reviews_Legacy') && ($reviews == 'true')) {
+		if (!class_exists('SMARTESTReviewsLegacy') && ($reviews == 'true')) {
 			include_once STBUSCARRYOVERLEGACY_PATH . 'reviews/reviews.php';
 		}
 		

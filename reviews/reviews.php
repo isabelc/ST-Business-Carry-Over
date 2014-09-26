@@ -10,12 +10,12 @@
  * 
  *  Adds Microdata markup (Schema.org) for rich snippets. Includes Testimonial widget. Optional: pulls aggregaterating to home page. Option to not pull it to home page, and just have a reviews page. Requires Smartest Themes for full functionality.
  * 
- * @package		Quick Business Website
+ * @package		ST Business Carry Over Legacy
  * @subpackage	Smartest Reviews Module
  * @author		Smartest Themes <isa@smartestthemes.com>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License
  */
-class SMARTESTReviewsBusiness {
+class SMARTESTReviewsLegacy {
 
 	var $dbtable = 'smareviewsb';
 	var $force_active_page = false;
@@ -28,19 +28,11 @@ class SMARTESTReviewsBusiness {
 	var $shown_hcard = false;
 	var $status_msg = '';
 
-	function SMARTESTReviewsBusiness() {
+	function SMARTESTReviewsLegacy() {
 		global $wpdb;
 
         define('IN_SMAR', 1);
         
-        /* uncomment the below block to display strict/notice errors */
-        /*
-        restore_error_handler();
-        error_reporting(E_ALL);
-        ini_set('error_reporting', E_ALL);
-        ini_set('html_errors',TRUE);
-        ini_set('display_errors',TRUE);
-        */
         $this->dbtable = $wpdb->prefix . $this->dbtable;
 		$this->plugin_version = get_option('qbw_smartestb_plugin_version');
         add_action('the_content', array(&$this, 'do_the_content'), 10); /* prio 10 prevents a conflict with some odd themes */
@@ -63,19 +55,19 @@ class SMARTESTReviewsBusiness {
 		}
    }
     function admin_options() {
-        global $SMARTESTReviewsBusinessAdmin;
+        global $SMARTESTReviewsLegacyAdmin;
         $this->include_admin();
-        $SMARTESTReviewsBusinessAdmin->real_admin_options();
+        $SMARTESTReviewsLegacyAdmin->real_admin_options();
     }
    function admin_save_post($post_id, $post) {
-       global $SMARTESTReviewsBusinessAdmin;
+       global $SMARTESTReviewsLegacyAdmin;
         $this->include_admin();
-       $SMARTESTReviewsBusinessAdmin->real_admin_save_post($post_id);
+       $SMARTESTReviewsLegacyAdmin->real_admin_save_post($post_id);
     }
     function admin_view_reviews() {
-        global $SMARTESTReviewsBusinessAdmin;
+        global $SMARTESTReviewsLegacyAdmin;
         $this->include_admin();
-        $SMARTESTReviewsBusinessAdmin->real_admin_view_reviews();
+        $SMARTESTReviewsLegacyAdmin->real_admin_view_reviews();
     }
     function get_jumplink_for_review($review,$page) {
        /* $page will be 1 for shortcode usage since it pulls most recent, which SHOULD all be on page 1 */
@@ -159,9 +151,9 @@ class SMARTESTReviewsBusiness {
         if ($current_dbversion == $plugin_db_version) {
             return false;
         }
-        global $SMARTESTReviewsBusinessAdmin;
+        global $SMARTESTReviewsLegacyAdmin;
         $this->include_admin(); /* include admin functions */
-        $SMARTESTReviewsBusinessAdmin->createUpdateReviewtable(); /* creates AND updates table */
+        $SMARTESTReviewsLegacyAdmin->createUpdateReviewtable(); /* creates AND updates table */
         /* initial installation */
         if ($current_dbversion == 0) {
            $this->options['dbversion'] = $plugin_db_version;
@@ -185,9 +177,9 @@ class SMARTESTReviewsBusiness {
             $this->options['dbversion'] = $plugin_db_version;
             $current_dbversion = $plugin_db_version;
             update_option('smar_options', $this->options);
-            global $SMARTESTReviewsBusinessAdmin;
+            global $SMARTESTReviewsLegacyAdmin;
             $this->include_admin(); /* include admin functions */
-            $SMARTESTReviewsBusinessAdmin->force_update_cache(); /* update any caches */
+            $SMARTESTReviewsLegacyAdmin->force_update_cache(); /* update any caches */
             return true;
         }
         return false;
@@ -1066,27 +1058,27 @@ function do_the_content($original_content) {
 		}
 	}
     function include_admin() {
-        global $SMARTESTReviewsBusinessAdmin;
+        global $SMARTESTReviewsLegacyAdmin;
 		require_once plugin_dir_path( __FILE__ ) . 'reviews-admin.php';
 
     }
     function admin_init() {
-        global $SMARTESTReviewsBusinessAdmin;
+        global $SMARTESTReviewsLegacyAdmin;
         $this->include_admin(); /* include admin functions */
-        $SMARTESTReviewsBusinessAdmin->real_admin_init();
+        $SMARTESTReviewsLegacyAdmin->real_admin_init();
     }
 	function admin_scripts() {
-		global $SMARTESTReviewsBusinessAdmin;
-        $SMARTESTReviewsBusinessAdmin->enqueue_admin_stuff();
+		global $SMARTESTReviewsLegacyAdmin;
+        $SMARTESTReviewsLegacyAdmin->enqueue_admin_stuff();
 	}
 	function getpluginurl() {
 		return trailingslashit(plugins_url( '' , __FILE__ ));
 
     }
 }
-if (!defined('IN_SMAR')) {global $SMARTESTReviewsBusiness;
-$SMARTESTReviewsBusiness = new SMARTESTReviewsBusiness();
-add_action ('after_setup_theme', array(&$SMARTESTReviewsBusiness,'activate'));
+if (!defined('IN_SMAR')) {global $SMARTESTReviewsLegacy;
+$SMARTESTReviewsLegacy = new SMARTESTReviewsLegacy();
+add_action ('after_setup_theme', array(&$SMARTESTReviewsLegacy,'activate'));
 }
 /* get widget */
 include_once('widget-testimonial.php');
