@@ -48,7 +48,7 @@
 						)
 					),
 					'orderby' => 'meta_value_num',
-					'meta_key' => '_stmb_service_order_number',
+					'meta_key' => '_smab_service-order-number',
 					'order' => 'ASC' );
 
 			} else {
@@ -59,7 +59,7 @@
 					'posts_per_page' => -1, 
 					'post_type' => 'smartest_services',
 					'orderby' => 'meta_value_num',
-					'meta_key' => '_stmb_service_order_number',
+					'meta_key' => '_smab_service-order-number',
 					'order' => 'ASC' );
 
 

@@ -84,7 +84,7 @@ class ST_Business_Carry_Over_Legacy{
 		add_action( 'manage_smartest_news_posts_custom_column', array( $this, 'smar_manage_news_columns' ), 10, 2 );	
 			
 		// custom sort order
-		add_filter( 'parse_query', array( $this, 'sort_staff' ) );// @test need
+		add_filter( 'parse_query', array( $this, 'sort_staff' ) );
 		add_filter( 'parse_query', array( $this, 'sort_services' ) );
 		
 		// add widget styles inline in head, if needed
@@ -200,7 +200,6 @@ class ST_Business_Carry_Over_Legacy{
 		add_action( 'admin_head-'. $sto, array( $this, 'frame_load' ));
 		
 	} // end add_admin
-	
 	
 	/**
 	* Reset options
@@ -440,8 +439,6 @@ class ST_Business_Carry_Over_Legacy{
 			update_option( 'smartest_reviews_page_id', $page_id );			
 		}
 		
-		// @test in legacy...
-
 		// Add the custom About page content from Theme Options panel to the regular About page content.
 		// Run this update only once
 		if ( get_option( 'stbcol_update_about_page' ) != 'completed' ) {
@@ -699,7 +696,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	global $post;
 	switch( $column ) {
 		case 'jobtitle' :
-			$jobtitle = get_post_meta( $post_id, '_stmb_staff_job_title', true );
+			$jobtitle = get_post_meta( $post_id, '_smab_staff_job_title', true );
 			 echo $jobtitle;
 			break;
 		default :
@@ -730,7 +727,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		global $post;
 		switch( $column ) {
 			case 'featureds' :
-				$sf = get_post_meta( $post_id, '_stmb_services_featured', true );
+				$sf = get_post_meta( $post_id, '_smab_services_featured', true );
 				if ( $sf )
 					_e('Featured', 'st-business-carry-over-legacy');
 				break;
@@ -761,7 +758,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		global $post;
 		switch( $column ) {
 			case 'featuredn' :
-				$sf = get_post_meta( $post_id, '_stmb_news_featured', true );
+				$sf = get_post_meta( $post_id, '_smab_news_featured', true );
 				if ( $sf )
 					_e('Featured', 'st-business-carry-over-legacy');
 				break;
@@ -780,7 +777,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	function sort_staff($query) {
 		if( !is_admin() && is_post_type_archive('smartest_staff') && $query->is_main_query() && isset( $query->query_vars['meta_key'] ) ) {
 		$query->query_vars['orderby'] = 'meta_value_num';
-		$query->query_vars['meta_key'] = '_stmb_staff_order_number';
+		$query->query_vars['meta_key'] = '_smab_staff-order-number';
 		$query->query_vars['order'] = 'ASC';
 		}
 		return $query;
@@ -801,7 +798,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			)
 		&& isset( $query->query_vars['meta_key'] ) ) {
 			$query->query_vars['orderby'] = 'meta_value_num';
-			$query->query_vars['meta_key'] = '_stmb_service_order_number';
+			$query->query_vars['meta_key'] = '_smab_service-order-number';
 			$query->query_vars['order'] = 'ASC';
 		}
 		return $query;

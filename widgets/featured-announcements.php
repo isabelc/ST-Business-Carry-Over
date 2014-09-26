@@ -53,7 +53,7 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 				'post_type' => 'smartest_news',
 				'meta_query' => array(
 									array  (
-										'key' => '_stmb_news_featured',
+										'key' => '_smab_news_featured',
 										'value'=> 'on'
 										)
 								)			
