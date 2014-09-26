@@ -287,6 +287,8 @@ class SMARTESTReviewsLegacy {
         return array($reviews, $total_reviews);
     }
 
+	
+	/* @todo do we need this for legacy?? */
     function aggregate_footer() {// for home page
 		global $smartestb_options;	
 		// gather agg data
