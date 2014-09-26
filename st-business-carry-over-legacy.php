@@ -34,9 +34,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 @todo change all stbco to stbcol so as not to clash with other plugin.
 
-
-update constant for path everywhere (STBUSINESSCARRYOVER_PATH). @todo
-
 update textdomain everywhere @todo
 
 */

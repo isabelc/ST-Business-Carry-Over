@@ -1,0 +1,31 @@
+#smar_respond_1 h2.summary,
+#smar_respond_1 h3.summary,#smar_respond_1 h4.summary,#smar_respond_1 h5.summary,#smar_respond_1 h6.summary{padding:5px 0}#smar_respond_1 blockquote.description{font-size:14px;font-weight:400}#smar_respond_1 blockquote.description p{font-size:14px;font-weight:400;display:inline!important}#smar_respond_1 p.response{font-size:14px;font-weight:400;font-style:italic}
+
+#smar_postcomment{font-size:1.1em;font-weight:700}#st-reviews-form label{display:inline!important}#st-reviews-form #fconfirm1,#st-reviews-form #fconfirm3{display:none}#smar_ad{background:#fff}#smar_ad label{font-weight:700}#st-reviews-form #fconfirm2{width:auto!important}
+#smar_respond_1,#smar_respond_2{margin:0!important;padding:0!important;clear:both!important}
+
+#smar_respond_1 p,#smar_respond_2 p{margin:0!important;padding:0!important;line-height:120%!important;margin-top:2px!important;margin-bottom:2px!important}#smar_respond_1 .smar_rating,#st-reviews-form .smar_rating{border:0!important;margin:0!important;padding:0!important;margin-left:0!important;margin-top:0!important;overflow:hidden;height:16px}#smar_respond_1 .sp_rating{line-height:1.7em;display:block}#smar_respond_1 .sp_rating *{border:0 none;margin:0;padding:0}#smar_respond_1 .base{background:url(newstars.png) 0 0 no-repeat;width:85px;height:17px;float:left;padding-right:4px;overflow:hidden;display:block}#smar_respond_1 .average{background:url(newstars.png) 0 -16px no-repeat;text-indent:-9999px;height:17px}#smar_respond_2{display:none;background-color:inherit}
+.smar_clear{clear:both}#st-reviews-form .sp_rating{line-height:1.7em;display:block}#st-reviews-form .sp_rating *{border:0 none;margin:0;padding:0}#st-reviews-form .status{height:16px;width:100px;overflow:hidden;position:relative;cursor:pointer;display:block}#st-reviews-form .base{display:none}
+#st-reviews-form .score{background:url(newstars.png) 0 0 no-repeat;width:85px;height:17px;float:left;position:relative}#st-reviews-form .score a{display:block;height:17px;float:left;text-indent:-9999px;position:absolute;overflow:hidden;line-height:1em}#st-reviews-form .score a:hover{background:url(newstars.png) bottom right no-repeat}#st-reviews-form .score1{width:20%;z-index:55}#st-reviews-form .score2{width:40%;z-index:54}#st-reviews-form .score3{width:60%;z-index:53}#st-reviews-form .score4{width:80%;z-index:52}#st-reviews-form .score5{width:100%;z-index:51}#smar_div_2{width:600px}#smar_table_2{text-align:left;width:100%}#smar_table_2 td{text-align:left}#smar_check_confirm{margin-top:10px;font-size:13px;color:#c00;margin-bottom:4px}
+#smar_status_msg div{
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+.smar_fl{
+	float:left;
+}
+.smar_checklabel{
+	margin:7px 0px 0px 10px
+}
+
+a#smar_button_1{
+	text-decoration:none;
+}
+#smar_table_2 tbody tr:nth-child(even), #smar_table_2 tbody tr:nth-child(2n) {background-color:inherit !important;}
+#st-reviews-form input{padding:0;margin:0!important;width:200px!important;min-height:36px;}#st-reviews-form textarea{padding:0!important;margin:0!important;width:400px!important;height:100px!important}#st-reviews-form small{padding:0!important;margin:0!important}#st-reviews-form table,#st-reviews-form td{border:0!important;border-style:none!important}
+
+.smar_pagination{clear:both;padding:0;margin-top:1.6em;position:relative;font-size:11px;line-height:13px}.smar_pagination_page{float:left;display:block;line-height:30px;padding-right:5px}.smar_pagination .smar_current,.smar_pagination a{display:block;float:left;margin:2px 5px 2px 0;padding:6px 9px 5px;text-decoration:none;width:auto;color:#fff;background:#555}.smar_pagination a:hover{color:#fff;background:#3279BB}.smar_pagination .smar_current{padding:6px 9px 5px;background:#3279BB;color:#fff}
+
+h2.reviewstitle{margin-top:1.5em}
+
+@media screen and (max-device-width:768px){#smar_div_2{width:100%}#st-reviews-form td{display:block}#st-reviews-form input{display:block;width:99% !important}#st-reviews-form textarea{width:99%!important}#st-reviews-form label.comment-field{padding-top:.5em;display:block!important}}
