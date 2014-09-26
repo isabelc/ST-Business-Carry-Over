@@ -180,7 +180,7 @@ class ST_Business_Carry_Over_Legacy{
 	public function add_admin() {
 		global $query_string;
 
-		$pagename = 'st-business-carryover-settings'; // @todo new and update this everywhere
+		$pagename = 'st-carryover-legacy-settings';
 		
 		if ( isset($_REQUEST['page']) && $pagename == $_REQUEST['page'] ) {
 			if (isset($_REQUEST['smartestthemes_save']) && 'reset' == $_REQUEST['smartestthemes_save']) {
@@ -195,7 +195,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		$icon = plugins_url( 'images/smartestthemes-icon.png' , __FILE__ );
 		
-		$sto=add_menu_page( __( 'ST Business Carry Over Legacy Options', 'st-business-carry-over-legacy' ), __('Business Carry Over Options', 'st-business-carry-over-legacy' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 66.6);
+		$sto=add_menu_page( __( 'ST Business Carry Over Legacy Options', 'st-business-carry-over-legacy' ), __('Business Carry Over Options', 'st-business-carry-over-legacy' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 68.9);
 		
 		add_action( 'admin_head-'. $sto, array( $this, 'frame_load' ));
 		
@@ -246,7 +246,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		//When Theme Options page is reset - Add the smartestb_options option
 
-		if ( $page == 'st-business-carryover-settings' ) {
+		if ( $page == 'st-carryover-legacy-settings' ) {
 			$query_inner .= " OR option_name = 'smartestb_options'";
 		}
 		$query = "DELETE FROM $wpdb->options WHERE $query_inner";
@@ -975,7 +975,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 						var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
 						var data = {
 							<?php 
-							if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'st-business-carryover-settings' ){
+							if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'st-carryover-legacy-settings' ){
 								?>
 								type: 'options',
 								<?php
