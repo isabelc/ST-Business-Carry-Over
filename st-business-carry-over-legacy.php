@@ -25,13 +25,6 @@ along with ST Business Carry Over Legacy; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/*
-
-@todo final checklist:
-@todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'quick-business-website'... to 'st-business-carry-over-legacy'
-
-*/
-
 class ST_Business_Carry_Over_Legacy{
 	private static $instance = null;
 
@@ -133,8 +126,6 @@ class ST_Business_Carry_Over_Legacy{
 	public function option_setup(){
 		//Update EMPTY options
 
-		// @todo sync with qbw to get old legacy names
-		
 		// get the old options first so as not to remove the original options such as business address
 		$smartestthemes_array = get_option('smartestb_options');
 		if ( empty( $smartestthemes_array ) ) {

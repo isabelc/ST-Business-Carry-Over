@@ -1,9 +1,5 @@
 <?php
 /**
-
-@todo bring in aggregate widget maybe??
-
-
  * Get reviews from visitors, and aggregate ratings and stars for your business in search results.
  * Includes Testimonial widget. 
  * 
@@ -366,6 +362,45 @@ $smartestb_options = get_option('smartestb_options');
 	
 	*/
 	
+
+	/*
+	* Shortcode for the Aggregate rating @test
+	*/
+    function aggregate_rating_func() {
+		
+		// gather agg data
+		$arr_Reviews = $this->get_reviews('', $this->options['reviews_per_page'], 1);
+		
+		$total_reviews = intval($arr_Reviews[1]);
+		$pageID = get_option('smartest_reviews_page_id');
+		$this->get_aggregate_reviews($pageID);
+		$best_score = 5;
+        $average_score = number_format($this->got_aggregate["aggregate"], 1);
+		
+		$aggregate_footer_output = '<div id="smar_respond_1">';
+		
+		/* we append like this to prevent newlines and wpautop issues */
+		
+		// prepend the business type declaration
+		
+		
+		
+		// no business type declaration, but override the #smar_respond_1, so do not concatenate 
+		$aggregate_footer_output = '<div id="agg-rating-shortcode"><div id="smar_hcard_s" class="isa_vcard">';
+		
+		
+		// do agg rating for all scenarios
+		$aggregate_footer_output .= '<br /><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate"> '. __('Average rating:', 'st-business-carry-over-legacy'). ' <span itemprop="ratingValue" class="average">' . $average_score . '</span> ' . __('out of', 'st-business-carry-over-legacy'). ' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over-legacy').' <span itemprop="ratingCount">' . $this->got_aggregate["total"] . ' </span>';
+		if($this->got_aggregate["total"] == 1)
+			$basedon = __('review.', 'st-business-carry-over-legacy');
+		else
+			$basedon = __('reviews.', 'st-business-carry-over-legacy');
+		$aggregate_footer_output .= sprintf(__('%s', 'st-business-carry-over-legacy'), $basedon). '</span>';
+		$aggregate_footer_output .= '</div></div><!-- end agg footer -->';
+		return $aggregate_footer_output;
+
+		
+    }
 	
     function iso8601($time=false) {
         if ($time === false)
@@ -1062,8 +1097,9 @@ function shortcode_smar_insert() {
 }
 if (!defined('IN_SMAR')) {global $SMARTESTReviewsLegacy;
 $SMARTESTReviewsLegacy = new SMARTESTReviewsLegacy();
-add_action ('after_setup_theme', array(&$SMARTESTReviewsLegacy,'activate'));
+add_action ('after_setup_theme', array( $SMARTESTReviewsLegacy,'activate'));
 }
 /* get widget */
 include_once('widget-testimonial.php');
+add_shortcode( 'aggregate_rating', array( $SMARTESTReviewsLegacy, 'aggregate_rating_func' ) );
 ?>
