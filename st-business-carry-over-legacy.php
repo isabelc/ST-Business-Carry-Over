@@ -84,11 +84,8 @@ class ST_Business_Carry_Over_Legacy{
 		add_action( 'manage_smartest_news_posts_custom_column', array( $this, 'smar_manage_news_columns' ), 10, 2 );	
 			
 		// custom sort order
-		add_filter( 'parse_query', array( $this, 'sort_staff' ) );
+		add_filter( 'parse_query', array( $this, 'sort_staff' ) );// @test need
 		add_filter( 'parse_query', array( $this, 'sort_services' ) );
-
-		// add custom post types to Appearance Menus screen
-		add_action( 'admin_head-nav-menus.php', array( $this, 'archive_menu_meta_box' ) );
 		
     } // end __contruct
 
@@ -422,7 +419,7 @@ class ST_Business_Carry_Over_Legacy{
 			// Create the reviews page if necessary.
 			global $wpdb;
 			// If page already been created, do not create
-			$page_exists = get_option( 'smartestthemes_reviews_page_id' );
+			$page_exists = get_option( 'smartest_reviews_page_id' );
 			if ( $page_exists > 0 && get_post( $page_exists ) ) {
 				return;
 			}
@@ -437,11 +434,8 @@ class ST_Business_Carry_Over_Legacy{
 				'comment_status' => 'closed'
 			);
 			$page_id = wp_insert_post( $page_data );
-			update_option( 'smartestthemes_reviews_page_id', $page_id );			
+			update_option( 'smartest_reviews_page_id', $page_id );			
 		}
-		
-
-		// @todo sync all _page_id option names with qbw. the old name.
 		
 		// @test in legacy...
 
@@ -449,7 +443,7 @@ class ST_Business_Carry_Over_Legacy{
 		// Run this update only once
 		if ( get_option( 'stbcol_update_about_page' ) != 'completed' ) {
 
-			$about_page_id = get_option( 'smartestthemes_about_page_id' );
+			$about_page_id = get_option( 'smartest_about_page_id' );
 			
 			// get any regular about page content
 			$about_page = get_post( $about_page_id );
@@ -809,55 +803,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		}
 		return $query;
 	}
-
-	/**
-	* Add CPT Archives to Menus screen
-	* @todo remove these 2 functions when they get added to WP core
-	*/
-	function archive_menu_meta_box() {
-		add_meta_box( 'add-cpt', __( 'Custom Archives', 'st-business-carry-over-legacy' ), 'archive_menu_meta_box_render', 'nav-menus', 'side', 'default' );
-	}
-
-	/* render custom post type archives meta box */
-	function archive_menu_meta_box_render() {
-		global $nav_menu_selected_id;
-		/* get custom post types with archive support */
-		$post_types = get_post_types( array( 'show_in_nav_menus' => true, 'has_archive' => true ), 'object' );
-		 
-		/* hydrate the necessary object properties for the walker */
-		foreach ( $post_types as &$post_type ) {
-			$post_type->classes = array();
-			$post_type->type = 'custom';// use custom to avoid PHP notices
-			$post_type->object_id = $post_type->name;
-			$post_type->title = $post_type->labels->name;
-			$post_type->object = 'cpt-archive';
-			$post_type->menu_item_parent = 0;
-			$post_type->url = get_post_type_archive_link($post_type->query_var);
-			$post_type->target = 0;
-			$post_type->attr_title = 0;
-			$post_type->xfn = 0;
-			$post_type->db_id = 0;
-		}
-		$walker = new Walker_Nav_Menu_Checklist( array() );
-		?>
-		<div id="archive" class="posttypediv">
-		<div id="tabs-panel-cpt-archive" class="tabs-panel tabs-panel-active">
-		<ul id="ctp-archive-checklist" class="categorychecklist form-no-clear">
-		<?php
-		echo walk_nav_menu_tree( array_map('wp_setup_nav_menu_item', $post_types), 0, (object) array( 'walker' => $walker) );
-		?>
-		</ul>
-		</div>
-		<p class="button-controls">
-		<span class="add-to-menu">
-		<input type="submit"<?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary right submit-add-to-menu" value="<?php esc_attr_e('Add to Menu', 'st-business-carry-over-legacy'); ?>" name="add-ctp-archive-menu-item" id="submit-cpt-archive" />
-		<span class="spinner"></span>
-		</span>
-		</p>
-		</div>
-		<?php
-	}
-		
+	
 	/**
 	 *
 	 * Plugin Options Panel
