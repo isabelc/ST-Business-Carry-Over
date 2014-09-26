@@ -87,6 +87,9 @@ class ST_Business_Carry_Over_Legacy{
 		add_filter( 'parse_query', array( $this, 'sort_staff' ) );// @test need
 		add_filter( 'parse_query', array( $this, 'sort_services' ) );
 		
+		// add widget styles inline in head, if needed
+		add_action( 'wp_head', 'stbco_wp_head', 9999 );
+		
     } // end __contruct
 
 	/**
@@ -1260,6 +1263,17 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		return array($output,$menu);
 
 	}// end machine	
+	
+	/**
+	* add widget styles inline in head, if needed
+	*/
+	public function stbco_wp_head() {
+
+		$css = get_option( 'smartestthemes_widget_styles' );
+		if ( $css ) {
+			?><style><?php echo $css; ?></style><?php
+		}
+	}
 	
 } // end class
 

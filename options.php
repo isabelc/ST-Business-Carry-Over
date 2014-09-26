@@ -1,8 +1,5 @@
 <?php
 /**
-
-@todo consider only 1 tab.
-
 @todo add tab icon if needed.
 
 * The plugin options for ST Business Carry Over Legacy

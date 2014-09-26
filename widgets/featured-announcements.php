@@ -32,7 +32,7 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 				$add_css .= '.sfawrap{width:100%;overflow:hidden;position:relative;margin-bottom:3em}.sfafig{float:left;margin:0 20px 0 0}.sfafig img{border:0 none}.sfacontent{overflow:hidden;padding-right:15px}.sfacontent p{margin-bottom:15px;margin-left:0}';
 			}
 			$css = get_option('smartestthemes_widget_styles') . $add_css;
-			update_option('smartestthemes_widget_styles', $css );// @todo add smartestthemes_widget_styles to wp_head!!
+			update_option('smartestthemes_widget_styles', $css );
 		}
 
 		/**
