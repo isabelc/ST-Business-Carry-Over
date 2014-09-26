@@ -10,8 +10,8 @@ function stbcol_options(){
 	$shortname = 'st';
 
 	// globalize the options
-	global $smartestthemes_options;
-	$smartestthemes_options = get_option('smartestthemes_options');
+	global $smartestb_options;
+	$smartestb_options = get_option('smartestb_options');
 
 	$options = array();
 

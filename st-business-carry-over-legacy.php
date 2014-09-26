@@ -120,13 +120,15 @@ class ST_Business_Carry_Over_Legacy{
 	public function option_setup(){
 		//Update EMPTY options
 
+		// @todo sync with qbw to get old legacy names
+		
 		// get the old options first so as not to remove the original options such as business address
-		$smartestthemes_array = get_option('smartestthemes_options');
+		$smartestthemes_array = get_option('smartestb_options');
 		if ( empty( $smartestthemes_array ) ) {
 			$smartestthemes_array = array();
 		}
 
-		update_option('smartestthemes_options',$smartestthemes_array);// add the old options
+		update_option('smartestb_options', $smartestthemes_array);// add the old options
 
 		$template = get_option('stbcol_template');
 
@@ -155,7 +157,7 @@ class ST_Business_Carry_Over_Legacy{
 			}
 		}
 		
-		update_option('smartestthemes_options',$smartestthemes_array);	
+		update_option('smartestb_options',$smartestthemes_array);	
 	
 	}// end option_setup	
 
@@ -165,7 +167,7 @@ class ST_Business_Carry_Over_Legacy{
 	public function add_admin() {
 		global $query_string;
 
-		$pagename = 'st-business-carryover-settings';
+		$pagename = 'st-business-carryover-settings'; // @todo new and update this everywhere
 		
 		if ( isset($_REQUEST['page']) && $pagename == $_REQUEST['page'] ) {
 			if (isset($_REQUEST['smartestthemes_save']) && 'reset' == $_REQUEST['smartestthemes_save']) {
@@ -229,10 +231,10 @@ class ST_Business_Carry_Over_Legacy{
 			}
 		}
 		
-		//When Theme Options page is reset - Add the smartestthemes_options option
+		//When Theme Options page is reset - Add the smartestb_options option
 
 		if ( $page == 'st-business-carryover-settings' ) {
-			$query_inner .= " OR option_name = 'smartestthemes_options'";
+			$query_inner .= " OR option_name = 'smartestb_options'";
 		}
 		$query = "DELETE FROM $wpdb->options WHERE $query_inner";
 		$wpdb->query($query);
@@ -243,7 +245,7 @@ class ST_Business_Carry_Over_Legacy{
 	 * adds smartest_staff, smartest_staff, smartest_staff, 
 	 */
 	function create_smartest_business_cpts() {
-		$options = get_option('smartestthemes_options');
+		$options = get_option('smartestb_options');
 		$staff = empty($options['st_show_staff']) ? '' : $options['st_show_staff'];
 		$news = empty($options['st_show_news']) ? '' : $options['st_show_news'];
 		$services = empty($options['st_show_services']) ? '' : $options['st_show_services'];
@@ -394,7 +396,7 @@ class ST_Business_Carry_Over_Legacy{
 	 */
 	public function after_setup() {
 
-		$options = get_option('smartestthemes_options');
+		$options = get_option('smartestb_options');
 		$reviews = empty($options['st_add_reviews']) ? '' : $options['st_add_reviews'];
 	
 		if (!class_exists('SMARTESTReviewsLegacy') && ($reviews == 'true')) {
@@ -492,7 +494,7 @@ class ST_Business_Carry_Over_Legacy{
 	function metaboxes( array $meta_boxes ) {
 		$prefix = '_stmb_';
 
-		global $smartestthemes_options;
+		global $smartestb_options;
 		
 		$meta_boxes[] = array(
 			'id'         => 'staff_details',
@@ -631,7 +633,7 @@ class ST_Business_Carry_Over_Legacy{
 	 */
 	public function register_widgets() {
 	
-		$options = get_option('smartestthemes_options');
+		$options = get_option('smartestb_options');
 
 		$svcs = empty($options['st_show_services']) ? '' : $options['st_show_services'];
 		$staff = empty($options['st_show_staff']) ? '' : $options['st_show_staff'];
@@ -848,10 +850,10 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	 *
 	 */
 	function options_page(){
-		$options = get_option('stbcol_template');
-		$image_dir = plugins_url( 'images/' , __FILE__ );
-		$plugin_data = get_plugin_data( __FILE__ );
-		$version = $plugin_data['Version'];
+		$options		= get_option('stbcol_template');
+		$image_dir	= plugins_url( 'images/' , __FILE__ );
+		$plugin_data	= get_plugin_data( __FILE__ );
+		$version		= $plugin_data['Version'];
 
 		?>
 	<div class="wrap" id="smartestthemes-container">
@@ -1049,7 +1051,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		if ( $save_type == 'options' ) {
 
 			// get the old options first so as not to remove the original options such as business address
-			$smartestthemes_array = get_option('smartestthemes_options');
+			$smartestthemes_array = get_option('smartestb_options');
 		
 			$data = $_POST['data'];
 			parse_str($data,$output);
@@ -1191,7 +1193,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			}
 			$output .= "</ul>";
 			
-			update_option('smartestthemes_options',$smartestthemes_array);
+			update_option('smartestb_options',$smartestthemes_array);
 			flush_rewrite_rules();
 		}
 		
