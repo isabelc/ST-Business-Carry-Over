@@ -34,9 +34,9 @@ Version: 		0.9.9
 *************************************************************************/
 
 $meta_boxes = array();
-$meta_boxes = apply_filters ( 'stbco_meta_boxes' , $meta_boxes );
+$meta_boxes = apply_filters ( 'stbcol_meta_boxes' , $meta_boxes );
 foreach ( $meta_boxes as $meta_box ) {
-	$my_box = new stbco_Meta_Box( $meta_box );
+	$my_box = new stbcol_Meta_Box( $meta_box );
 }
 
 /**
@@ -44,7 +44,7 @@ foreach ( $meta_boxes as $meta_box ) {
  * Define ALL validation methods inside this class and use the names of these
  * methods in the definition of meta boxes (key 'validate_func' of each field)
  */
-class stbco_Meta_Box_Validate {
+class stbcol_Meta_Box_Validate {
 	function check_text( $text ) {
 		if ($text != 'hello') {
 			return false;
@@ -60,16 +60,16 @@ class stbco_Meta_Box_Validate {
  */
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
        //winblows
-    define( 'STBCO_META_BOX_URL', trailingslashit( str_replace( DIRECTORY_SEPARATOR, '/', str_replace( str_replace( '/', DIRECTORY_SEPARATOR, WP_CONTENT_DIR ), WP_CONTENT_URL, dirname(__FILE__) ) ) ) );
+    define( 'STBCOL_META_BOX_URL', trailingslashit( str_replace( DIRECTORY_SEPARATOR, '/', str_replace( str_replace( '/', DIRECTORY_SEPARATOR, WP_CONTENT_DIR ), WP_CONTENT_URL, dirname(__FILE__) ) ) ) );
     
 } else {
-    define( 'STBCO_META_BOX_URL', apply_filters( 'stbco_meta_box_url', trailingslashit( str_replace( WP_CONTENT_DIR, WP_CONTENT_URL, dirname( __FILE__ ) ) ) ) );
+    define( 'STBCOL_META_BOX_URL', apply_filters( 'stbcol_meta_box_url', trailingslashit( str_replace( WP_CONTENT_DIR, WP_CONTENT_URL, dirname( __FILE__ ) ) ) ) );
 }
 
 /**
  * Create meta boxes
  */
-class stbco_Meta_Box {
+class stbcol_Meta_Box {
 	protected $_meta_box;
 
 	function __construct( $meta_box ) {
@@ -393,7 +393,7 @@ class stbco_Meta_Box {
 					echo '</div>';
 				break;
 				case 'oembed':
-					echo '<input class="stbco_oembed" type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" />','<p class="cmb_metabox_description">', $field['desc'], '</p>';
+					echo '<input class="stbcol_oembed" type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" />','<p class="cmb_metabox_description">', $field['desc'], '</p>';
 					echo '<p class="cmb-spinner spinner"></p>';
 					echo '<div id="', $field['id'], '_status" class="cmb_media_status ui-helper-clearfix embed_wrap">';
 						if ( $meta != '' ) {
@@ -475,7 +475,7 @@ class stbco_Meta_Box {
 
 			// validate meta value
 			if ( isset( $field['validate_func']) ) {
-				$ok = call_user_func( array( 'stbco_Meta_Box_Validate', $field['validate_func']), $new );
+				$ok = call_user_func( array( 'stbcol_Meta_Box_Validate', $field['validate_func']), $new );
 				if ( $ok === false ) { // pass away when meta value is invalid
 					continue;
 				}
@@ -514,23 +514,23 @@ class stbco_Meta_Box {
 /**
  * Adding scripts and styles
  */
-function stbco_scripts( $hook ) {
-	if ( ( ( $hook == 'post.php' ) || ( $hook == 'post-new.php' ) ) && in_array( stbco_get_current_post_type(), array( 'smartest_staff', 'smartest_services', 'smartest_news', 'smartest_slide' ) )
+function stbcol_scripts( $hook ) {
+	if ( ( ( $hook == 'post.php' ) || ( $hook == 'post-new.php' ) ) && in_array( stbcol_get_current_post_type(), array( 'smartest_staff', 'smartest_services', 'smartest_news', 'smartest_slide' ) )
 	) {
-		wp_register_script( 'stbco-timepicker', STBCO_META_BOX_URL . 'js/jquery.timePicker.min.js' );
-		wp_register_script( 'stbco-scripts', STBCO_META_BOX_URL . 'js/cmb.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox', 'farbtastic' ), '0.9.1' );
-		wp_localize_script( 'stbco-scripts', 'cmb_ajax_data', array( 'ajax_nonce' => wp_create_nonce( 'ajax_nonce' ), 'post_id' => get_the_ID() ) );
-		wp_enqueue_script( 'stbco-timepicker' );
-		wp_enqueue_script( 'stbco-scripts' );
-		wp_register_style( 'stbco-styles', STBCO_META_BOX_URL . 'style.css', array( 'thickbox', 'farbtastic' ) );
-		wp_enqueue_style( 'stbco-styles' );
+		wp_register_script( 'stbcol-timepicker', STBCOL_META_BOX_URL . 'js/jquery.timePicker.min.js' );
+		wp_register_script( 'stbcol-scripts', STBCOL_META_BOX_URL . 'js/cmb.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload', 'thickbox', 'farbtastic' ), '0.9.1' );
+		wp_localize_script( 'stbcol-scripts', 'cmb_ajax_data', array( 'ajax_nonce' => wp_create_nonce( 'ajax_nonce' ), 'post_id' => get_the_ID() ) );
+		wp_enqueue_script( 'stbcol-timepicker' );
+		wp_enqueue_script( 'stbcol-scripts' );
+		wp_register_style( 'stbcol-styles', STBCOL_META_BOX_URL . 'style.css', array( 'thickbox', 'farbtastic' ) );
+		wp_enqueue_style( 'stbcol-styles' );
   	}
 }
-add_action( 'admin_enqueue_scripts', 'stbco_scripts', 10 );
+add_action( 'admin_enqueue_scripts', 'stbcol_scripts', 10 );
 /**
 * gets the current post type in the WordPress Admin
 */
-function stbco_get_current_post_type() {
+function stbcol_get_current_post_type() {
 	global $post, $typenow, $current_screen;
 	//we have a post so we can just get the post type from that
 	if ( $post && $post->post_type )
@@ -548,9 +548,9 @@ function stbco_get_current_post_type() {
 	return null;
 }
 
-function stbco_editor_footer_scripts() { ?>
+function stbcol_editor_footer_scripts() { ?>
 	<?php
-	if ( isset( $_GET['stbco_force_send'] ) && 'true' == $_GET['stbco_force_send'] ) {
+	if ( isset( $_GET['stbcol_force_send'] ) && 'true' == $_GET['stbcol_force_send'] ) {
 		$label = $_GET['cmb_send_label'];
 		if ( empty( $label ) ) $label="Select File";
 		?>
@@ -562,14 +562,14 @@ function stbco_editor_footer_scripts() { ?>
 		<?php
 	}
 }
-add_action( 'admin_print_footer_scripts', 'stbco_editor_footer_scripts', 99 );
+add_action( 'admin_print_footer_scripts', 'stbcol_editor_footer_scripts', 99 );
 
 // Force 'Insert into Post' button from Media Library
-add_filter( 'get_media_item_args', 'stbco_force_send' );
-function stbco_force_send( $args ) {
+add_filter( 'get_media_item_args', 'stbcol_force_send' );
+function stbcol_force_send( $args ) {
 
 	// if the Gallery tab is opened from a custom meta box field, add Insert Into Post button
-	if ( isset( $_GET['stbco_force_send'] ) && 'true' == $_GET['stbco_force_send'] )
+	if ( isset( $_GET['stbcol_force_send'] ) && 'true' == $_GET['stbcol_force_send'] )
 		$args['send'] = true;
 
 	// if the From Computer tab is opened AT ALL, add Insert Into Post button after an image is uploaded
@@ -603,7 +603,7 @@ function stbco_force_send( $args ) {
 				}
 
 				jQuery(function($) {
-					if (cmbGetParameterByNameInline("stbco_force_send")=="true") {
+					if (cmbGetParameterByNameInline("stbcol_force_send")=="true") {
 						var cmb_send_label = cmbGetParameterByNameInline("cmb_send_label");
 						$("td.savesend input").val(cmb_send_label);
 					}
@@ -616,11 +616,11 @@ function stbco_force_send( $args ) {
 
 }
 
-add_action( 'wp_ajax_stbco_oembed_handler', 'stbco_oembed_ajax_results' );
+add_action( 'wp_ajax_stbcol_oembed_handler', 'stbcol_oembed_ajax_results' );
 /**
  * Handles our oEmbed ajax request
  */
-function stbco_oembed_ajax_results() {
+function stbcol_oembed_ajax_results() {
 
 	// verify our nonce
 	if ( ! ( isset( $_REQUEST['cmb_ajax_nonce'], $_REQUEST['oembed_url'] ) && wp_verify_nonce( $_REQUEST['cmb_ajax_nonce'], 'ajax_nonce' ) ) )

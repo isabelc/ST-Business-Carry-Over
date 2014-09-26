@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
 		var buttonLabel;
 		formfield = $(this).prev('input').attr('name');
 		buttonLabel = 'Use as ' + $('label[for=' + formfield + ']').text();
-		tb_show('', 'media-upload.php?post_id=' + $('#post_ID').val() + '&type=file&stbco_force_send=true&cmb_send_label=' + buttonLabel + '&TB_iframe=true');
+		tb_show('', 'media-upload.php?post_id=' + $('#post_ID').val() + '&type=file&stbcol_force_send=true&cmb_send_label=' + buttonLabel + '&TB_iframe=true');
 		return false;
 	});
 

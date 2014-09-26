@@ -206,29 +206,29 @@
 			
 			if ('reviews' == $location) {
 			
-				$out .= '<div class="reviews-list" itemprop="itemReviewed" itemscope itemtype="http://schema.org/'. apply_filters( 'stbco_agg_rating_schema', $schema ) . '"><span class="' . $wrapper_class . '">';
+				$out .= '<div class="reviews-list" itemprop="itemReviewed" itemscope itemtype="http://schema.org/'. apply_filters( 'stbcol_agg_rating_schema', $schema ) . '"><span class="' . $wrapper_class . '">';
 			
 			} else {
 			
-				$out .= '<br /><span class="' . $wrapper_class . '" itemprop="itemReviewed" itemscope itemtype="http://schema.org/'. apply_filters( 'stbco_agg_rating_schema', $schema ) . '">';
+				$out .= '<br /><span class="' . $wrapper_class . '" itemprop="itemReviewed" itemscope itemtype="http://schema.org/'. apply_filters( 'stbcol_agg_rating_schema', $schema ) . '">';
 
 			}
 			
-			$out .= '<a href="' . site_url('/') . '" class="' . $bn_class . '"><span itemprop="name">' . apply_filters( 'stbco_agg_rating_bn', $bn ) . '</span></a><br />';
+			$out .= '<a href="' . site_url('/') . '" class="' . $bn_class . '"><span itemprop="name">' . apply_filters( 'stbcol_agg_rating_bn', $bn ) . '</span></a><br />';
 			
 			if ( $phone) {
-				$out .= '<span itemprop="telephone" class="' . $phone_class . '">' . apply_filters( 'stbco_agg_rating_phone', $phone ) . '</span><br />';
+				$out .= '<span itemprop="telephone" class="' . $phone_class . '">' . apply_filters( 'stbcol_agg_rating_phone', $phone ) . '</span><br />';
 			}
 			
 			if ( $street || $city || $state || $zip || $country || $suite ) {
 			
-				$out .= '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="' . $address_class . '"><span itemprop="streetAddress">' . apply_filters( 'stbco_agg_rating_street', $street ) . '</span>&nbsp; ' . apply_filters( 'stbco_agg_rating_suite', $suite ) . '<br /><span itemprop="addressLocality"> ' . apply_filters( 'stbco_agg_rating_city', $city ) . '</span>';
+				$out .= '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="' . $address_class . '"><span itemprop="streetAddress">' . apply_filters( 'stbcol_agg_rating_street', $street ) . '</span>&nbsp; ' . apply_filters( 'stbcol_agg_rating_suite', $suite ) . '<br /><span itemprop="addressLocality"> ' . apply_filters( 'stbcol_agg_rating_city', $city ) . '</span>';
 				
 				if ( $city && $state ) {
 					$out .= ', ';
 				}
 				
-				$out .= '<span itemprop="addressRegion">' . apply_filters( 'stbco_agg_rating_state', $state ) . '</span>&nbsp;<span itemprop="postalCode">' . apply_filters( 'stbco_agg_rating_zip', $zip ) . '</span>&nbsp; ' . apply_filters( 'stbco_agg_rating_country', $country ) . '</span> &nbsp;<br />';
+				$out .= '<span itemprop="addressRegion">' . apply_filters( 'stbcol_agg_rating_state', $state ) . '</span>&nbsp;<span itemprop="postalCode">' . apply_filters( 'stbcol_agg_rating_zip', $zip ) . '</span>&nbsp; ' . apply_filters( 'stbcol_agg_rating_country', $country ) . '</span> &nbsp;<br />';
 			}
 
 			$out .= $closer;

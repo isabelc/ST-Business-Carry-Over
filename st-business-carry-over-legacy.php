@@ -28,11 +28,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 /*
 
 
-
-@todo update all textdomain of 'st-business-carry-over' to 'st-business-carry-over-legacy'
+@todo final checklist:
+@todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'quick-business-website'... to 'st-business-carry-over-legacy'
 @todo use old reviews menu page.
-
-@todo change all stbco to stbcol so as not to clash with other plugin.
 
 update textdomain everywhere @todo
 
@@ -68,7 +66,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		add_action( 'wp_ajax_smartestthemes_ajax_post_action', array( $this, 'ajax_callback' ) );
 		
-		add_filter( 'stbco_meta_boxes', array( $this, 'metaboxes' ) );
+		add_filter( 'stbcol_meta_boxes', array( $this, 'metaboxes' ) );
 		
 		add_filter( 'enter_title_here', array( $this, 'change_staff_enter_title' ) );
 		
@@ -114,7 +112,7 @@ class ST_Business_Carry_Over_Legacy{
 		load_plugin_textdomain( 'st-business-carry-over-legacy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		
 		include STBUSCARRYOVERLEGACY_PATH . 'options.php';
-		add_action( 'init', 'stbco_options' );
+		add_action( 'init', 'stbcol_options' );
 	}
 	
 	
@@ -133,7 +131,7 @@ class ST_Business_Carry_Over_Legacy{
 
 		update_option('smartestthemes_options',$smartestthemes_array);// add the old options
 
-		$template = get_option('stbco_template');
+		$template = get_option('stbcol_template');
 
 		foreach($template as $option) {
 			if($option['type'] != 'heading'){
@@ -174,7 +172,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if ( isset($_REQUEST['page']) && $pagename == $_REQUEST['page'] ) {
 			if (isset($_REQUEST['smartestthemes_save']) && 'reset' == $_REQUEST['smartestthemes_save']) {
-				$options =  get_option('stbco_template');
+				$options =  get_option('stbcol_template');
 				
 				$this->reset_options($options,$pagename);
 				
@@ -431,7 +429,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		// Add the custom About page content from Theme Options panel to the regular About page content.
 		// Run this update only once
-		if ( get_option( 'stbco_update_about_page' ) != 'completed' ) {
+		if ( get_option( 'stbcol_update_about_page' ) != 'completed' ) {
 
 			$about_page_id = get_option( 'smartestthemes_about_page_id' );
 			
@@ -473,7 +471,7 @@ class ST_Business_Carry_Over_Legacy{
   
 			}
 			
-			update_option( 'stbco_update_about_page', 'completed' );
+			update_option( 'stbcol_update_about_page', 'completed' );
 			
 		}
 
@@ -614,7 +612,7 @@ class ST_Business_Carry_Over_Legacy{
 	 * Initialize the metabox class.
 	 */
 	function init_meta_boxes() {
-		if ( ! class_exists( 'stbco_Meta_Box' ) )
+		if ( ! class_exists( 'stbcol_Meta_Box' ) )
 			require_once STBUSCARRYOVERLEGACY_PATH . 'metabox/init.php';
 	}
 	
@@ -853,7 +851,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	 *
 	 */
 	function options_page(){
-		$options = get_option('stbco_template');
+		$options = get_option('stbcol_template');
 		$image_dir = plugins_url( 'images/' , __FILE__ );
 		$plugin_data = get_plugin_data( __FILE__ );
 		$version = $plugin_data['Version'];
@@ -926,9 +924,9 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	
 		$fr = plugins_url( '/', __FILE__ );
 
-		add_action('admin_head', 'stbco_admin_head');
+		add_action('admin_head', 'stbcol_admin_head');
 		
-		function stbco_admin_head() {
+		function stbcol_admin_head() {
 		
 			?>
 			<link rel="stylesheet" type="text/css" href="<?php echo plugins_url( '/admin-style.css', __FILE__ ); ?>" media="screen" />
@@ -1059,7 +1057,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			$data = $_POST['data'];
 			parse_str($data,$output);
 
-			$options = get_option('stbco_template');
+			$options = get_option('stbcol_template');
 					
 			foreach($options as $option_array){
 				$id = isset($option_array['id']) ? $option_array['id'] : '';

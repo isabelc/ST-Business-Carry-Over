@@ -2,7 +2,7 @@
 /**
 * The plugin options for ST Business Carry Over
 */
-function stbco_options(){
+function stbcol_options(){
 
 	$shortname = 'st';
 
@@ -162,6 +162,6 @@ function stbco_options(){
 			'std'	=> __('Submit Your Review','st-business-carry-over-legacy'),
 			'type'	=> 'text');
 
-	update_option('stbco_template',$options);
+	update_option('stbcol_template',$options);
 }
 ?>
