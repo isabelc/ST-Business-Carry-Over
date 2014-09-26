@@ -28,7 +28,7 @@ if ( ! class_exists( 'SmartestStaff_Legacy' ) ) {
 		*/
 		public function add_css( $css ) {
 			$add_css = '';
-			if ( get_option('st_show_staff') == 'true' ) {
+			if ( get_option('smartestb_show_staff') == 'true' ) {
 				$add_css .= '.widget_smartest_staff_list, .sstwrap {width: 100%;}.sstwrap {overflow: hidden;position: relative;margin-bottom: 1em;display: block;}.ssfig {float: left;margin: 0px 20px 0px 0px;}.sstcontent {padding-top: 20px;	float: left;}';
 			}
 			$css = get_option('smartestthemes_widget_styles') . $add_css;

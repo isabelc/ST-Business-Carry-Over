@@ -28,11 +28,11 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 		*/
 		public function add_css( $css ) {
 			$add_css = '';
-			if ( get_option('st_show_news') == 'true' ) {
+			if ( get_option('smartestb_show_news') == 'true' ) {
 				$add_css .= '.sfawrap{width:100%;overflow:hidden;position:relative;margin-bottom:3em}.sfafig{float:left;margin:0 20px 0 0}.sfafig img{border:0 none}.sfacontent{overflow:hidden;padding-right:15px}.sfacontent p{margin-bottom:15px;margin-left:0}';
 			}
 			$css = get_option('smartestthemes_widget_styles') . $add_css;
-			update_option('smartestthemes_widget_styles', $css );
+			update_option('smartestthemes_widget_styles', $css );// @todo add smartestthemes_widget_styles to wp_head!!
 		}
 
 		/**
@@ -68,9 +68,9 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 						<?php the_post_thumbnail( 'newswidget' ); ?>
 						</a></figure>
 					<?php } else {
-						// if not stopped with option
+						// if not stopped with option @test
 
-						if(get_option('st_stop_theme_icon') != 'true') { ?>
+						if(get_option('smartestb_stop_theme_icon') != 'true') { ?>
 
 							<a href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>" class="sfafig"><div class="newsicon"><i class="fa fa-bullhorn fa-3x"></i></div></a>
 						<?php }

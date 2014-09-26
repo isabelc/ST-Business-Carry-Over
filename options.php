@@ -3,11 +3,13 @@
 
 @todo consider only 1 tab.
 
-* The plugin options for ST Business Carry Over
+@todo add tab icon if needed.
+
+* The plugin options for ST Business Carry Over Legacy
 */
 function stbcol_options(){
 
-	$shortname = 'st';
+	$shortname = 'smartestb';
 
 	// globalize the options
 	global $smartestb_options;
@@ -41,6 +43,12 @@ function stbcol_options(){
 		'id' => $shortname.'_show_services',
 		'std' => 'true',
 		'type' => 'checkbox');
+		
+$options[] = array(
+	'desc' => sprintf( __('%s Set Custom Sort-Order? %s Check this to set a custom sort-order for services. Default sort-order is descending order by date of post.','st-business-carry-over-legacy'), '<strong>', '</strong>' ),
+	'id' => $shortname.'_enable_service_sort',
+	'std' => 'false',
+	'type' => 'checkbox');		
 						
 	$options[] = array(
 		'name' => __('Enable Reviews?','st-business-carry-over-legacy'),

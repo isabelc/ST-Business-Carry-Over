@@ -48,6 +48,8 @@ class ST_Business_Carry_Over_Legacy{
 			define( 'STBUSCARRYOVERLEGACY_PATH', plugin_dir_path(__FILE__) );
 		}
 
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		
 		// Registers custom taxonomy for services
 		add_action( 'init', array( $this, 'taxonomies' ), 0 );	
 		
@@ -112,6 +114,17 @@ class ST_Business_Carry_Over_Legacy{
 		add_action( 'init', 'stbcol_options' );
 	}
 	
+	
+	
+	/**
+	* Store plugin version as option
+	*
+	* @return void
+	*/
+	public function admin_init(){
+		$plugin_data = get_plugin_data( __FILE__, false );
+		update_option( 'stbcol_smartestb_plugin_version', $plugin_data['Version'] );
+	}	
 	
 	
 	/**  
@@ -242,13 +255,15 @@ class ST_Business_Carry_Over_Legacy{
 	
 	/** 
 	 * add CPTs conditionally, if enabled
-	 * adds smartest_staff, smartest_staff, smartest_staff, 
+	 * adds smartest_staff, smartest_news, smartest_services 
 	 */
 	function create_smartest_business_cpts() {
+		
 		$options = get_option('smartestb_options');
-		$staff = empty($options['st_show_staff']) ? '' : $options['st_show_staff'];
-		$news = empty($options['st_show_news']) ? '' : $options['st_show_news'];
-		$services = empty($options['st_show_services']) ? '' : $options['st_show_services'];
+		
+		$staff = empty($options['smartestb_show_staff']) ? '' : $options['smartestb_show_staff'];
+		$news = empty($options['smartestb_show_news']) ? '' : $options['smartestb_show_news'];
+		$services = empty($options['smartestb_show_services']) ? '' : $options['smartestb_show_services'];
 		
 		if( $staff == 'true'  ) {
 			$args = array(
@@ -397,7 +412,7 @@ class ST_Business_Carry_Over_Legacy{
 	public function after_setup() {
 
 		$options = get_option('smartestb_options');
-		$reviews = empty($options['st_add_reviews']) ? '' : $options['st_add_reviews'];
+		$reviews = empty($options['smartestb_add_reviews']) ? '' : $options['smartestb_add_reviews'];
 	
 		if (!class_exists('SMARTESTReviewsLegacy') && ($reviews == 'true')) {
 			include_once STBUSCARRYOVERLEGACY_PATH . 'reviews/reviews.php';
@@ -425,7 +440,11 @@ class ST_Business_Carry_Over_Legacy{
 			update_option( 'smartestthemes_reviews_page_id', $page_id );			
 		}
 		
+
+		// @todo sync all _page_id option names with qbw. the old name.
 		
+		// @test in legacy...
+
 		// Add the custom About page content from Theme Options panel to the regular About page content.
 		// Run this update only once
 		if ( get_option( 'stbcol_update_about_page' ) != 'completed' ) {
@@ -441,7 +460,7 @@ class ST_Business_Carry_Over_Legacy{
 			
 				
 				// custom content
-				$about_page_custom_content = empty($options['st_about_page']) ? '' : $options['st_about_page'];
+				$about_page_custom_content = empty($options['smartestb_about_page']) ? '' : $options['smartestb_about_page'];
 
 				if ( $about_page_custom_content ) {
 				
@@ -451,7 +470,7 @@ class ST_Business_Carry_Over_Legacy{
 
 		
 				// custom About page image
-				$about_pic = empty($options['st_about_picture']) ? '' : $options['st_about_picture'];
+				$about_pic = empty($options['smartestb_about_picture']) ? '' : $options['smartestb_about_picture'];
 
 				if ( $about_pic ) {
 				
@@ -492,9 +511,9 @@ class ST_Business_Carry_Over_Legacy{
 	 * @return array
 	 */
 	function metaboxes( array $meta_boxes ) {
-		$prefix = '_stmb_';
+		$prefix = '_smab_';
 
-		global $smartestb_options;
+		// @test remove global $smartestb_options;
 		
 		$meta_boxes[] = array(
 			'id'         => 'staff_details',
@@ -513,7 +532,7 @@ class ST_Business_Carry_Over_Legacy{
 				array(
 					'name' => __( 'Sort Order Number', 'st-business-carry-over-legacy' ),
 					'desc' => __( 'Give this person a number to order them on the list on the staff page and in the staff widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new staff members later without having to change everyone\'s current number.', 'st-business-carry-over-legacy' ),
-					'id'   => $prefix . 'staff_order_number',
+					'id'   => $prefix . 'staff-order-number',
 					'type' => 'text',
 					'std' => 9999
 				),
@@ -540,13 +559,7 @@ class ST_Business_Carry_Over_Legacy{
 					'desc' => __('The part of the profile address after "www.linkedin.com/". Optional', 'st-business-carry-over-legacy'),
 					'id' => $prefix . 'staff_linkedin',
 					'type' => 'text_medium',
-				),
-				array(
-					'name' => __('Instagram Username', 'st-business-carry-over-legacy'),
-					'desc' => __('The part of the profile address after "www.instagram.com/". Optional', 'st-business-carry-over-legacy'),
-					'id' => $prefix . 'staff_instagram',
-					'type' => 'text_medium',
-				),			
+				)
 			)
 		);
 
@@ -568,24 +581,25 @@ class ST_Business_Carry_Over_Legacy{
 			)
 		);
 
-			
-		$meta_boxes[] = array(
-			'id'         => 'services-sort-order',
-			'title'      => __( 'Set a Sort-Order', 'st-business-carry-over-legacy' ),
-			'pages'      => array( 'smartest_services' ),
-			'context'    => 'normal',
-			'priority'   => 'high',//high, core, default, low
-			'show_names' => true,
-			'fields'     => array(
-				array(
-					'name' => __( 'Sort Order Number', 'st-business-carry-over-legacy' ),
-					'desc' => __( 'Give this service a number to order it on the list on the service page and in the services widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new services later without having to change all current numbers.', 'st-business-carry-over-legacy' ),
-					'id'   => $prefix . 'service_order_number',
-					'type' => 'text',
-					'std' => 9999
-				),
-			)
-		);
+		if( get_option('smartestb_enable_service_sort') == 'true' ) { 			
+			$meta_boxes[] = array(
+				'id'         => 'services-sort-order',
+				'title'      => __( 'Set a Sort-Order', 'st-business-carry-over-legacy' ),
+				'pages'      => array( 'smartest_services' ),
+				'context'    => 'normal',
+				'priority'   => 'high',//high, core, default, low
+				'show_names' => true,
+				'fields'     => array(
+					array(
+						'name' => __( 'Sort Order Number', 'st-business-carry-over-legacy' ),
+						'desc' => __( 'Give this service a number to order it on the list on the service page and in the services widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new services later without having to change all current numbers.', 'st-business-carry-over-legacy' ),
+						'id'   => $prefix . 'service-order-number',
+						'type' => 'text',
+						'std' => 9999
+					),
+				)
+			);
+		}
 		
 		$meta_boxes[] = array(
 			'id'         => 'featured_news',
@@ -635,9 +649,9 @@ class ST_Business_Carry_Over_Legacy{
 	
 		$options = get_option('smartestb_options');
 
-		$svcs = empty($options['st_show_services']) ? '' : $options['st_show_services'];
-		$staff = empty($options['st_show_staff']) ? '' : $options['st_show_staff'];
-		$news = empty($options['st_show_news']) ? '' : $options['st_show_news'];
+		$svcs = empty($options['smartestb_show_services']) ? '' : $options['smartestb_show_services'];
+		$staff = empty($options['smartestb_show_staff']) ? '' : $options['smartestb_show_staff'];
+		$news = empty($options['smartestb_show_news']) ? '' : $options['smartestb_show_news'];
 		
 		if( $news == 'true'  ) { 
 		
@@ -862,7 +876,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		<form action="" enctype="multipart/form-data" id="smartestform">
 			<div id="header">
 			   <div class="logo">
-			<?php 
+			<?php  // @test if logo shows up
 			echo apply_filters('smartestthemes_backend_branding', '<img alt="Smartest Themes" src="'. $image_dir. 'st_logo_admin.png" />'); ?>
 			  </div>
 				 <div class="theme-info">
@@ -1226,54 +1240,6 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			 //End Heading
 			$select_value = '';                                   
 			switch ( $value['type'] ) {
-			
-			case 'text':
-				if( !empty($value['std']) ) {
-					$val = esc_attr($value['std']);
-				}
-				$std = esc_attr(get_option($value['id']));
-				if ( $std != "") { $val = $std; }
-				$output .= '<input class="smartestthemes-input" name="'. $value['id'] .'" id="'. $value['id'] .'" type="'. $value['type'] .'" value="'. stripslashes($val) .'" />';
-			break;
-			case 'select':
-				$output .= '<select class="smartestthemes-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
-				$select_value = get_option($value['id']);
-				foreach ($value['options'] as $option) {
-					$selected = '';
-					 if($select_value != '') {
-						 if ( $select_value == $option) { $selected = ' selected="selected"';} 
-					 } else {
-						 if ( isset($value['std']) )
-							 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
-					 }
-					  
-					 $output .= '<option'. $selected .'>';
-					 $output .= $option;
-					 $output .= '</option>';
-				 
-				 } 
-				 $output .= '</select>';
-			break;
-			case 'select2':
-				$output .= '<select class="smartestthemes-input" name="'. $value['id'] .'" id="'. $value['id'] .'">';
-				$select_value = get_option($value['id']);
-				foreach ($value['options'] as $option => $name) {
-					$selected = '';
-					 if($select_value != '') {
-						 if ( $select_value == $option) { $selected = ' selected="selected"';} 
-					 } else {
-						 if ( isset($value['std']) )
-							 if ($value['std'] == $option) { $selected = ' selected="selected"'; }
-					 }
-					  
-					 $output .= '<option'. $selected .' value="'.$option.'">';
-					 $output .= $name;
-					 $output .= '</option>';
-				 
-				 } 
-				 $output .= '</select>';
-				
-			break;
 
 			case "checkbox": 
 		if( !empty($value['std']) ) {
@@ -1298,42 +1264,10 @@ function smar_manage_staff_columns( $column, $post_id ) {
 				$output .= '<input type="checkbox" class="checkbox smartestthemes-input" name="'.  $value['id'] .'" id="'. $value['id'] .'" value="true" '. $checked .' />';
 
 			break;
-			case "multicheck":
-			
-				$std = ! empty($value['std']) ? $value['std'] : '';
-				$multiclass = ! empty($value['class']) ? $value['class'] : '';
-				foreach ($value['options'] as $key => $option) {
-												 
-					$smartestthemes_key = $value['id'] . '_' . $key;
-					$saved_std = get_option($smartestthemes_key);
-							
-					if(!empty($saved_std)) { 
-						  if($saved_std == 'true'){
-							 $checked = 'checked="checked"';  
-						  } 
-						  else{
-							  $checked = '';     
-						  }
-					}
-					elseif( $std == $key) {
-					   $checked = 'checked="checked"';
-					}
-					else {
-						$checked = '';
-					}
-
-					$output .= '<input type="checkbox" class="checkbox smartestthemes-input" name="'. $smartestthemes_key .'" id="'. $smartestthemes_key .'" value="true" '. $checked .' /><label for="'. $smartestthemes_key .'">'. $option .'</label>';
-					
-					if ( ! $multiclass ) {
-						$output .= '<br />';
-					}
-											
-				}
-			break;
 			case "info":
 				$default = $value['std'];
 				$output .= $default;
-			break;                                   
+			break;
 			case "heading":
 				if($counter >= 2){
 				   $output .= '</div>'."\n";
