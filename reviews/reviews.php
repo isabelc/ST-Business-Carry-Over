@@ -5,9 +5,9 @@
  * Description: Get reviews from visitors, and aggregate ratings and stars for your business in search results. Adds Microdata markup (Schema.org) for rich snippets. Includes Testimonial widget. Optional: pulls aggregaterating to home page. Option to not pull it to home page, and just have a reviews page. Requires Smartest Themes for full functionality.
  */
  
- if ( ! class_exists( 'Smartest_Themes_Reviews' ) ) {
+ if ( ! class_exists( 'Smartest_Themes_Reviews_Legacy' ) ) {
  
-	class Smartest_Themes_Reviews {
+	class Smartest_Themes_Reviews_Legacy {
 
 		private static $instance = null;
 		public static function get_instance() {
@@ -923,7 +923,7 @@
 		 */
 		public function smartest_reviews_register_widgets() {
 			if( get_option('st_add_reviews') == 'true'  ) {
-				register_widget('SmartestReviewsTestimonial');
+				register_widget('SmartestReviewsTestimonialLegacy');
 			}
 		}
 
@@ -1388,13 +1388,13 @@
 		
 	} // end class
 
-	$Smartest_Themes_Reviews = Smartest_Themes_Reviews::get_instance();
+	$Smartest_Themes_Reviews_Legacy = Smartest_Themes_Reviews_Legacy::get_instance();
 
 	if ( ! shortcode_exists( 'smartest_reviews' ) ) {
-		add_shortcode( 'smartest_reviews', array( $Smartest_Themes_Reviews, 'reviews_shortcode' ) );
+		add_shortcode( 'smartest_reviews', array( $Smartest_Themes_Reviews_Legacy, 'reviews_shortcode' ) );
 	}
 	if ( ! shortcode_exists( 'aggregate_rating' ) ) {
-		add_shortcode( 'aggregate_rating', array( $Smartest_Themes_Reviews, 'aggregate_footer_func' ) );
+		add_shortcode( 'aggregate_rating', array( $Smartest_Themes_Reviews_Legacy, 'aggregate_footer_func' ) );
 	}
 
 }

@@ -7,9 +7,9 @@
  * @extends WP_Widget
  */
 
-if ( ! class_exists( 'SmartestFeaturedAnnounce' ) ) {
+if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
  
-	class SmartestFeaturedAnnounce extends WP_Widget {
+	class SmartestFeaturedAnnounceLegacy extends WP_Widget {
 
 		/**
 		 * Register widget

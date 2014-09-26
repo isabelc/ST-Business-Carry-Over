@@ -7,10 +7,8 @@
  * @extends 	WP_Widget
  */
 
- if ( ! class_exists( 'SmartestFeaturedServices' ) ) {
- 
-	class SmartestFeaturedServices extends WP_Widget {
-
+ if ( ! class_exists( 'SmartestFeaturedServicesLegacy' ) ) {
+ 	class SmartestFeaturedServicesLegacy extends WP_Widget {
 		/**
 		 * Register widget with WordPress.
 		 */

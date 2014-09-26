@@ -30,11 +30,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 @todo final checklist:
 @todo update all textdomain of 'st-business-carry-over' or 'crucible' or 'smartestb' or 'quick-business-website'... to 'st-business-carry-over-legacy'
+
+
+
 @todo use old reviews menu page.
 
-update textdomain everywhere @todo
 
 */
+
 class ST_Business_Carry_Over_Legacy{
 	private static $instance = null;
 
@@ -400,7 +403,7 @@ class ST_Business_Carry_Over_Legacy{
 		$options = get_option('smartestthemes_options');
 		$reviews = empty($options['st_add_reviews']) ? '' : $options['st_add_reviews'];
 	
-		if (!class_exists('Smartest_Themes_Reviews') && ($reviews == 'true')) {
+		if (!class_exists('Smartest_Themes_Reviews_Legacy') && ($reviews == 'true')) {
 			include_once STBUSCARRYOVERLEGACY_PATH . 'reviews/reviews.php';
 		}
 		
@@ -645,8 +648,8 @@ class ST_Business_Carry_Over_Legacy{
 			include STBUSCARRYOVERLEGACY_PATH . 'widgets/announcements.php';
 			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-announcements.php';
 		
-			register_widget('SmartestAnnouncements');
-			register_widget('SmartestFeaturedAnnounce');
+			register_widget('SmartestAnnouncements_Legacy');
+			register_widget('SmartestFeaturedAnnounceLegacy');
 		
 		}
 		if( $svcs == 'true'  ) { 
@@ -654,14 +657,14 @@ class ST_Business_Carry_Over_Legacy{
 			include STBUSCARRYOVERLEGACY_PATH . 'widgets/all-services.php';
 			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-services.php';		
 		
-			register_widget('SmartestServices'); 
-			register_widget('SmartestFeaturedServices');
+			register_widget('SmartestServices_Legacy'); 
+			register_widget('SmartestFeaturedServicesLegacy');
 		
 		}
 		if( $staff == 'true' ) {
 		
 			include STBUSCARRYOVERLEGACY_PATH . 'widgets/staff.php';
-			register_widget('SmartestStaff');
+			register_widget('SmartestStaff_Legacy');
 		
 		}
 	}

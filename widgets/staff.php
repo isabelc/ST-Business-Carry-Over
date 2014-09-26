@@ -7,9 +7,9 @@
  * @extends 	WP_Widget
  */
 
-if ( ! class_exists( 'SmartestStaff' ) ) {
+if ( ! class_exists( 'SmartestStaff_Legacy' ) ) {
 
-	 class SmartestStaff extends WP_Widget {
+	 class SmartestStaff_Legacy extends WP_Widget {
 	 
 		/**
 		 * Register widget

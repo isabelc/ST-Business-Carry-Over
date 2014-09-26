@@ -7,9 +7,9 @@
  * @subpackage Reviews 
  * @extends 	WP_Widget
  */
-if ( ! class_exists( 'SmartestReviewsTestimonial' ) ) {
+if ( ! class_exists( 'SmartestReviewsTestimonialLegacy' ) ) {
 
-	class SmartestReviewsTestimonial extends WP_Widget {
+	class SmartestReviewsTestimonialLegacy extends WP_Widget {
 		/**
 		 * Register widget with WordPress.
 		 */
