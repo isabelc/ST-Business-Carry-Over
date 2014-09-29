@@ -68,10 +68,7 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 						<?php the_post_thumbnail( 'newswidget' ); ?>
 						</a></figure>
 					<?php } else {
-						// if not stopped with option @test
-
 						if(get_option('smartestb_stop_theme_icon') != 'true') { ?>
-
 							<a href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>" class="sfafig"><div class="newsicon"><i class="fa fa-bullhorn fa-3x"></i></div></a>
 						<?php }
 					} ?>

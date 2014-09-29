@@ -500,8 +500,6 @@ class ST_Business_Carry_Over_Legacy{
 	function metaboxes( array $meta_boxes ) {
 		$prefix = '_smab_';
 
-		// @test remove global $smartestb_options;
-		
 		$meta_boxes[] = array(
 			'id'         => 'staff_details',
 			'title'      => __('Details', 'st-business-carry-over-legacy'),
@@ -815,7 +813,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 		<form action="" enctype="multipart/form-data" id="smartestform">
 			<div id="header">
 			   <div class="logo">
-			<?php  // @test if logo shows up
+			<?php
 			echo apply_filters('smartestthemes_backend_branding', '<img alt="Smartest Themes" src="'. $image_dir. 'st_logo_admin.png" />'); ?>
 			  </div>
 				 <div class="theme-info">
@@ -1269,3 +1267,29 @@ function smar_manage_staff_columns( $column, $post_id ) {
 
 register_activation_hook(__FILE__, array('ST_Business_Carry_Over_Legacy', 'activate'));
 $ST_Business_Carry_Over_Legacy = ST_Business_Carry_Over_Legacy::get_instance();
+
+/** @todo remove
+ * Log my own debug messages
+ */
+function isa_log( $message ) {
+    if (WP_DEBUG === true) {
+        if ( is_array( $message) || is_object( $message ) ) {
+            error_log( print_r( $message, true ) );
+        } else {
+            error_log( $message );
+        }
+    }
+}
+
+function st_load_fontawesome() {
+     wp_enqueue_style('font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+}
+add_action('wp_enqueue_scripts','st_load_fontawesome');
+
+function st_enable_news_icon() {
+
+	if ( get_option( 'smartestb_stop_theme_icon' ) != 'false') {
+		update_option( 'smartestb_stop_theme_icon', 'false' );
+	}
+}
+add_action( 'init', 'st_enable_news_icon' ); 

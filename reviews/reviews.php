@@ -265,106 +265,8 @@ class SMARTESTReviewsLegacy {
         return array($reviews, $total_reviews);
     }
 
-	
 	/*
-
-@test remove this function but 1st see if aggregate appears below reviews on reviews page.
-
-
-
-    function aggregate_footer() {// for home page
-		global $smartestb_options;	
-		// gather agg data
-		$postID = get_option('smartest_reviews_page_id');
-		$arr_Reviews = $this->get_reviews('', $this->options['reviews_per_page'], 1);
-	 	$reviews = $arr_Reviews[0];// 12.5 prob dont need
-		$total_reviews = intval($arr_Reviews[1]);
-		$this->get_aggregate_reviews($postID);
-        $best_score = 5;
-        $average_score = number_format($this->got_aggregate["aggregate"], 1);
-	    $aggregate_footer_output = '';
-		
-		// only if set to agg Business ratings on front page and is front page & if home page is static then show.
-		
-		if ( ($this->options['show_hcard_on'] == 1) && is_front_page() && (get_option('show_on_front') == 'page') ) {
-						$show = true;
-					}
-else {$show = false; }
-
-       	if ($show) { // we append like this to prevent newlines and wpautop issues
-
-				// if set to declare business schema type, do it
-            	if ( $this->options['biz_declare'] == 1 ) {
-						$isabiz_declare = ' itemscope itemtype="http://schema.org/LocalBusiness"';// isa depend
-		                $aggregate_footer_output = '<div id="smar_respond_1"><div id="smar_hcard_s"' . $isabiz_declare . ' class="isa_vcard">';
-
-$smartestb_options = get_option('smartestb_options');
-	$bn = stripslashes_deep(esc_attr($smartestb_options['smartestb_business_name']));if(!$bn) {$bn = get_bloginfo('name'); }
-
-              $aggregate_footer_output .= '<a itemprop="name" href="' . site_url('/')
- . '">' . $bn . '</a><br />';
-		                if (// isa depend addy
-			                        $smartestb_options['smartestb_address_street'] != '' || 
-			                        $smartestb_options['smartestb_address_city'] != '' ||
-			                        $smartestb_options['smartestb_address_state'] != '' ||
-			                        $smartestb_options['smartestb_address_zip'] != '' ||
-			                        $smartestb_options['smartestb_address_country'] != ''
-			                   )
-			                {
-			                    $aggregate_footer_output .= '<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
-			                    if ($smartestb_options['smartestb_address_street'] != '') {
-			                        $aggregate_footer_output .= '<span itemprop="streetAddress">' . $smartestb_options['smartestb_address_street'] . '</span>&nbsp;';
-			                    }
-
-								if ($smartestb_options['smartestb_address_suite'] != '') {
-											                        $aggregate_footer_output .= ' ' . $smartestb_options['smartestb_address_suite'] . '&nbsp;';
-											                    }
-
-			                    if ($smartestb_options['smartestb_address_city'] != '') {
-			                        $aggregate_footer_output .='<span itemprop="addressLocality">' . $smartestb_options['smartestb_address_city'] . '</span>,&nbsp;';
-			                    }
-			                    if ($smartestb_options['smartestb_address_state'] != '') {
-			                        $aggregate_footer_output .='<span itemprop="addressRegion">' . $smartestb_options['smartestb_address_state'] . '</span>,&nbsp;';
-			                    }
-			                    if ($smartestb_options['smartestb_address_zip'] != '') {
-			                        $aggregate_footer_output .='<span class="postal-code" itemprop="postalCode">' . $smartestb_options['smartestb_address_zip'] . '</span>&nbsp;';
-			                    }
-			                    if ($smartestb_options['smartestb_address_country'] != '') {
-			                        $aggregate_footer_output .='<span itemprop="addressCountry">' . $smartestb_options['smartestb_address_country'] . '</span>&nbsp;';
-			                    }
-			
-			                    $aggregate_footer_output .= '</span>';
-			                }
-			
-			                if ( $smartestb_options['smartestb_phone_number'] != '') {// isa depend
-			                    $aggregate_footer_output .= '<br />&nbsp;&bull;&nbsp<span itemprop="telephone">' . $smartestb_options['smartestb_phone_number'] . '</span>';
-			                }
-
-
-					} else { // end if biz_declare, do else
-							$aggregate_footer_output = '<div id="smar_respond_1"><div id="smar_hcard_s" class="isa_vcard">';
-						}
-
-					// do agg rating for both scenarios
-
-					$aggregate_footer_output .= '<br /><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate"> '. __('Average rating:', 'st-business-carry-over-legacy'). ' <span itemprop="ratingValue" class="average">' . $average_score . '</span> ' . __('out of', 'st-business-carry-over-legacy'). ' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over-legacy').' <span itemprop="ratingCount">' . $this->got_aggregate["total"] . ' </span>';
-				
-					if($this->got_aggregate["total"] == 1)
-					    $basedon = __('review.', 'st-business-carry-over-legacy');
-					else
-					    $basedon = __('reviews.', 'st-business-carry-over-legacy');
-					$aggregate_footer_output .= sprintf(__('%s', 'st-business-carry-over-legacy'), $basedon). '</span>';
-	                $aggregate_footer_output .= '</div></div><!-- end agg footer -->';
-            
-			}// end if $show
-		        return $aggregate_footer_output;
-    } // end aggregate_footer()
-	
-	*/
-	
-
-	/*
-	* Shortcode for the Aggregate rating @test
+	* Shortcode for the Aggregate rating
 	*/
     function aggregate_rating_func() {
 		
@@ -677,14 +579,6 @@ function shortcode_smar_insert() {
             $the_content .= $this->show_reviews_form();
         }
         
-		
-		/*
-		// @test remove but see if reviews page still has aggregate on bottom
-        $the_content .= $this->aggregate_footer(); /* check if we need to show something in the footer also
-        */
-		
-		
-		
         $the_content .= '</div><!-- do the content -->'; /* smar_respond_1 */
 
         $the_content = preg_replace('/\n\r|\r\n|\n|\r|\t/', '', $the_content); /* minify to prevent automatic line breaks, not removing double spaces */
