@@ -36,7 +36,7 @@ class SMARTESTReviewsLegacy {
 	    add_action( 'admin_menu', array( $this, 'addmenu' ) );
         add_action( 'wp_ajax_update_field', array( $this, 'admin_view_reviews' ) );
 	    add_action( 'save_post', array( $this, 'admin_save_post' ), 10, 2 );
-		add_action( 'admin_init', array( $this, 'create_reviews_page'));//isa, admin_init in frame but for stand-alone plugin hook to after_setup_theme
+		
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
     }
@@ -651,18 +651,6 @@ $smartestb_options = get_option('smartestb_options');
         return $text.'... ';
     }
 
-/**
- * Create reviews page, storing page id.
- * @uses insert_post()
- */
-function create_reviews_page() {
-	// if set in theme options
-	if(get_option('smartestb_add_reviews') == 'true') {// isa depend
-		global $Quick_Business_Website;
-		$Quick_Business_Website->insert_post('page', esc_sql( _x('reviews', 'page_slug', 'st-business-carry-over-legacy') ), 'smartest_reviews_page_id', __('Reviews', 'st-business-carry-over-legacy'), '[SMAR_INSERT]' );
-	}
-
-}
 function shortcode_smar_insert() {
 		global $post;
 
@@ -692,7 +680,7 @@ function shortcode_smar_insert() {
 		
 		/*
 		// @test remove but see if reviews page still has aggregate on bottom
-        $the_content .= $this->aggregate_footer(); /* check if we need to show something in the footer also */
+        $the_content .= $this->aggregate_footer(); /* check if we need to show something in the footer also
         */
 		
 		
