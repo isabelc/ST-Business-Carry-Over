@@ -1,7 +1,5 @@
 <?php
 /**
-@todo add tab icon if needed.
-
 * The plugin options for ST Business Carry Over Legacy
 */
 function stbcol_options(){
@@ -53,14 +51,6 @@ $options[] = array(
 		'id' => $shortname.'_add_reviews',
 		'std' => 'true',
 		'type' => 'checkbox');
-		
-		
-	/* Reviews @todo maybe remove tab */		
-	$options[] = array(
-		'name' => __( 'Reviews','st-business-carry-over-legacy' ),
-		'class' => 'reviews',
-		'type' => 'heading');
-		
 
 	update_option('stbcol_template',$options);
 }
