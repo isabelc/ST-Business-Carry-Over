@@ -37,31 +37,70 @@
 			// if cat is selected, do tax query
 			if ( ! empty ($service_category) ) {
 			
-				$query_args = array( 
-					'posts_per_page' => -1, 
-					'post_type' => 'smartest_services',
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'smartest_service_category',
-							'field' => 'id',
-							'terms' => array( $service_category ),
-						)
-					),
-					'orderby' => 'meta_value_num',
-					'meta_key' => '_smab_service-order-number',
-					'order' => 'ASC' );
+				if( get_option('smartestb_enable_service_sort') == 'true'  ) {
+
+					// custom sort order is enabled
+
+			
+					$query_args = array( 
+						'posts_per_page' => -1, 
+						'post_type' => 'smartest_services',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'smartest_service_category',
+								'field' => 'id',
+								'terms' => array( $service_category ),
+							)
+						),
+						'orderby' => 'meta_value_num',
+						'meta_key' => '_smab_service-order-number',
+						'order' => 'ASC' );
+						
+				} else {
+				
+					// default sort order
+					$query_args = array( 
+						'posts_per_page' => -1, 
+						'post_type' => 'smartest_services',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'smartest_service_category',
+								'field' => 'id',
+								'terms' => array( $service_category ),
+							)
+						),
+						'orderby' => 'title',
+						'order' => 'ASC' );
+					
+					
+				
+				}
 
 			} else {
 
 				// no tax query
+				
+				if( get_option('smartestb_enable_service_sort') == 'true'  ) {
 
+					// custom sort order is enabled				
+
+					$query_args = array( 
+						'posts_per_page' => -1, 
+						'post_type' => 'smartest_services',
+						'orderby' => 'meta_value_num',
+						'meta_key' => '_smab_service-order-number',
+						'order' => 'ASC' );
+				} else {
+				
+				
+				// default sort order
 				$query_args = array( 
 					'posts_per_page' => -1, 
 					'post_type' => 'smartest_services',
-					'orderby' => 'meta_value_num',
-					'meta_key' => '_smab_service-order-number',
-					'order' => 'ASC' );
-
+					'orderby' => 'title',
+					'order' => 'ASC' );				
+				
+				}
 
 
 			}

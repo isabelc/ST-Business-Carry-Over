@@ -3,7 +3,7 @@
 Plugin Name: ST Business Carry Over Legacy
 Plugin URI: https://smartestthemes.com/docs/category/st-business-carry-over-legacy-wordpress-plugin/
 Description: Carry over your staff, announcements, services, and reviews from your Legacy Smartest Themes to any WordPress theme.
-Version: 1.0-alpha-2
+Version: 1.0-alpha-3
 Author: Smartest Themes
 Author URI: http://smartestthemes.com
 License: GPL2
@@ -78,10 +78,12 @@ class ST_Business_Carry_Over_Legacy{
 			
 		// custom sort order
 		add_filter( 'parse_query', array( $this, 'sort_staff' ) );
-		add_filter( 'parse_query', array( $this, 'sort_services' ) );
+		if( get_option('smartestb_enable_service_sort') == 'true'  ) {
+			add_filter( 'parse_query', array( $this, 'sort_services' ) );
+		}
 		
 		// add widget styles inline in head, if needed
-		add_action( 'wp_head', 'stbco_wp_head', 9999 );
+		add_action( 'wp_head', array( $this, 'stbco_wp_head' ), 9999 );
 		
     } // end __contruct
 

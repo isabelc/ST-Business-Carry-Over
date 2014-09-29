@@ -45,20 +45,43 @@
 
 			echo '<h3 class="widget-title">'. $title . '</h3>';
 			
-			/* loop through announcements */
+			
+			if( get_option('smartestb_enable_service_sort') == 'true'  ) {
 
-			$query_args = array( 
-				'post_type' => 'smartest_services',
-				'meta_query' => array(
-							array  (
-								'key' => '_smab_services_featured',
-								'value'=> 'on' 
-							)
-						),
-				'orderby' => 'meta_value_num',
-				'meta_key' => '_smab_service-order-number',
-				'order' => 'ASC'
-				);
+				// custom sort order is enabled			
+
+				$query_args = array( 
+					'post_type' => 'smartest_services',
+					'meta_query' => array(
+								array  (
+									'key' => '_smab_services_featured',
+									'value'=> 'on' 
+								)
+							),
+					'orderby' => 'meta_value_num',
+					'meta_key' => '_smab_service-order-number',
+					'order' => 'ASC'
+					);
+					
+			} else {
+
+					// default sort order
+
+					$query_args = array( 
+						'post_type' => 'smartest_services',
+						'meta_query' => array(
+									array  (
+										'key' => '_smab_services_featured',
+										'value'=> 'on' 
+										)
+									)
+						);
+				
+			}
+			
+			
+			
+			
 			$sbffs = new WP_Query( $query_args );
 			if ( $sbffs->have_posts() ) {
 				while ( $sbffs->have_posts() ) {
