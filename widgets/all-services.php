@@ -16,8 +16,8 @@
 		public function __construct() {
 			parent::__construct(
 				'smartest_services_list',
-				__('Smartest Services List', 'st-business-carry-over-legacy'),
-				array( 'description' => __( 'Display the full list of Services, or a selected segment.', 'st-business-carry-over-legacy' ), )
+				__('Smartest Services List', 'st-business-carry-over'),
+				array( 'description' => __( 'Display the full list of Services, or a selected segment.', 'st-business-carry-over' ), )
 			);
 		}
 		/**
@@ -26,7 +26,7 @@
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Services', 'st-business-carry-over-legacy' ) : $instance['title'], $instance, $this->id_base );		
+			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Services', 'st-business-carry-over' ) : $instance['title'], $instance, $this->id_base );		
 			$service_category_term_id = isset( $instance['service_category'] ) ? $instance['service_category'] : '';
 			$service_category = !empty($service_category_term_id) ? $service_category_term_id : '';
 			echo $args['before_widget'];
@@ -137,15 +137,15 @@
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Services', 'st-business-carry-over-legacy' );
+			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Services', 'st-business-carry-over' );
 			$instance_service_category = isset( $instance[ 'service_category' ] ) ? $instance[ 'service_category' ] : '';
 			?>
 			<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over-legacy' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 			</p>
 			<p>
-			<label for="<?php echo $this->get_field_id( 'service_category' ); ?>"><?php _e( 'Optional. Only show services of this category:', 'st-business-carry-over-legacy' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'service_category' ); ?>"><?php _e( 'Optional. Only show services of this category:', 'st-business-carry-over' ); ?></label>
 			<select class="widefat" name="<?php echo $this->get_field_name( 'service_category' ); ?>" id="<?php echo $this->get_field_id( 'service_category' ); ?>">
 			<option value="" <?php if (empty($instance_service_category)) echo 'selected="selected"'; ?>>  
 			</option>';

@@ -17,8 +17,8 @@ if ( ! class_exists( 'SmartestStaff_Legacy' ) ) {
 		public function __construct() {
 			parent::__construct(
 				'smartest_staff_list',
-				__('Smartest Staff List', 'st-business-carry-over-legacy'),
-				array( 'description' => __( 'Display the full list of Staff members.', 'st-business-carry-over-legacy' ), )
+				__('Smartest Staff List', 'st-business-carry-over'),
+				array( 'description' => __( 'Display the full list of Staff members.', 'st-business-carry-over' ), )
 			);
 			add_action( 'init', array($this, 'add_css'), 5);
 		}
@@ -41,7 +41,7 @@ if ( ! class_exists( 'SmartestStaff_Legacy' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Staff', 'st-business-carry-over-legacy' ) : $instance['title'], $instance, $this->id_base );
+			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Staff', 'st-business-carry-over' ) : $instance['title'], $instance, $this->id_base );
 			echo $args['before_widget'];
 
 			echo '<h3 class="widget-title">'. $title . '</h3>';
@@ -89,10 +89,10 @@ if ( ! class_exists( 'SmartestStaff_Legacy' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Staff', 'st-business-carry-over-legacy' );
+			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Staff', 'st-business-carry-over' );
 			?>
 			<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over-legacy' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 			</p>
 			<?php 

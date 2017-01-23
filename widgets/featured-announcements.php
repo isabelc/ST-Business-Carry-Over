@@ -17,8 +17,8 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 		public function __construct() {
 			parent::__construct(
 				'smartest_featured_announce',
-				__('Smartest Featured Announcements', 'st-business-carry-over-legacy'),
-				array( 'description' => __( 'Display selected featured announcements.', 'st-business-carry-over-legacy' ), )
+				__('Smartest Featured Announcements', 'st-business-carry-over'),
+				array( 'description' => __( 'Display selected featured announcements.', 'st-business-carry-over' ), )
 			);
 			add_action( 'init', array($this, 'add_css'), 15);
 		}
@@ -41,7 +41,7 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 		 * @param array $instance Saved values from database.
 		 */
 		public function widget( $args, $instance ) {
-			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Featured News', 'st-business-carry-over-legacy' ) : $instance['title'], $instance, $this->id_base );
+			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Featured News', 'st-business-carry-over' ) : $instance['title'], $instance, $this->id_base );
 
 			echo $args['before_widget'];
 			echo '<h3 class="widget-title">'. $title . '</h3>';
@@ -77,7 +77,7 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 					<h4><a href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_the_title(); ?></a></h4>
 					<p><?php echo get_the_excerpt(); ?></p>
 					<a class="button" href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-					<?php _e( 'Read More', 'st-business-carry-over-legacy' ); ?></a>
+					<?php _e( 'Read More', 'st-business-carry-over' ); ?></a>
 				</div></div>
 			 
 				<?php } // endwhile;
@@ -85,9 +85,9 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 				} // end if have posts
 
 				else { 
-					$li = '<a href="'.get_post_type_archive_link( 'smartest_news' ).'">'. __('News', 'st-business-carry-over-legacy'). '</a>';
+					$li = '<a href="'.get_post_type_archive_link( 'smartest_news' ).'">'. __('News', 'st-business-carry-over'). '</a>';
 					?>
-					<p><?php printf(__( 'Coming soon. See all %s.', 'st-business-carry-over-legacy'), $li); ?></p>		
+					<p><?php printf(__( 'Coming soon. See all %s.', 'st-business-carry-over'), $li); ?></p>		
 	<?php 
 					}
 					wp_reset_postdata();
@@ -114,10 +114,10 @@ if ( ! class_exists( 'SmartestFeaturedAnnounceLegacy' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form( $instance ) {
-			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Featured News', 'st-business-carry-over-legacy' );		
+			$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Featured News', 'st-business-carry-over' );		
 			?>
 			<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over-legacy' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'st-business-carry-over' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 			</p>
 			<?php 

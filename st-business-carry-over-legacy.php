@@ -1,27 +1,27 @@
 <?php
 /*
-Plugin Name: ST Business Carry Over Legacy
-Plugin URI: https://smartestthemes.com/docs/category/st-business-carry-over-legacy-wordpress-plugin/
-Description: Carry over your staff, announcements, services, and reviews from your Legacy Smartest Themes to any WordPress theme.
-Version: 1.0
-Author: Smartest Themes
-Author URI: http://smartestthemes.com
+Plugin Name: ST Business Carry Over
+Plugin URI: https://isabelcastillo.com/docs/st-business-carry-over
+Description: Carry over your staff, announcements, services, and reviews from your Smartest Themes to any WordPress theme.
+Version: 1.1.alpha1
+Author: Isabel Castillo
+Author URI: https://isabelcastillo.com
 License: GPL2
 Text Domain: st-business-carry-over-legacy
 Domain Path: languages
-Copyright 2014 Smartest Themes(email : isa@smartestthemes.com)
+Copyright 2014-2017 Isabel Castillo
 
-ST Business Carry Over Legacy is free software; you can redistribute it and/or modify
+ST Business Carry Over is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
 published by the Free Software Foundation.
 
-ST Business Carry Over Legacy is distributed in the hope that it will be useful,
+ST Business Carry Over is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with ST Business Carry Over Legacy; if not, write to the Free Software
+along with ST Business Carry Over; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
@@ -103,7 +103,7 @@ class ST_Business_Carry_Over_Legacy{
 	
 	public function load() {
 		
-		load_plugin_textdomain( 'st-business-carry-over-legacy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'st-business-carry-over', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		
 		include STBUSCARRYOVERLEGACY_PATH . 'options.php';
 		add_action( 'init', 'stbcol_options' );
@@ -188,7 +188,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		$icon = plugins_url( 'images/smartestthemes-icon.png' , __FILE__ );
 		
-		$sto=add_menu_page( __( 'ST Business Carry Over Legacy Options', 'st-business-carry-over-legacy' ), __('Business Carry Over Options', 'st-business-carry-over-legacy' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 68.9);
+		$sto=add_menu_page( __( 'ST Business Carry Over Legacy Options', 'st-business-carry-over' ), __('Business Carry Over Options', 'st-business-carry-over' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 68.9);
 		
 		add_action( 'admin_head-'. $sto, array( $this, 'frame_load' ));
 		
@@ -259,31 +259,31 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if( $staff == 'true'  ) {
 			$args = array(
-				'label'						=> __('Staff','st-business-carry-over-legacy'),
-				'singular_label'			=> __('Staff','st-business-carry-over-legacy'),
+				'label'						=> __('Staff','st-business-carry-over'),
+				'singular_label'			=> __('Staff','st-business-carry-over'),
 				'public'						=> true,
 				'show_ui'					=> true,
 				'capability_type'		=> 'post',
 				'hierarchical'				=> false,
 				'rewrite'					=> array(
-												'slug'				=> __('staff', 'st-business-carry-over-legacy'),
+												'slug'				=> __('staff', 'st-business-carry-over'),
 												'with_front'	=> false),
 				'exclude_from_search'	=> false,
 				'labels'							=> array(
-					'name'					=> __( 'Staff','st-business-carry-over-legacy' ),
-					'singular_name'		=> __( 'Staff','st-business-carry-over-legacy' ),
-					'add_new'				=> __( 'Add New','st-business-carry-over-legacy' ),
-					'add_new_item'	=> __( 'Add New Staff','st-business-carry-over-legacy' ),
-					'all_items'				=> __( 'All Staff','st-business-carry-over-legacy' ),
-					'edit'						=> __( 'Edit','st-business-carry-over-legacy' ),
-					'edit_item'			=> __( 'Edit Staff','st-business-carry-over-legacy' ),
-					'new_item'			=> __( 'New Staff','st-business-carry-over-legacy' ),
-					'view'					=> __( 'View Staff','st-business-carry-over-legacy' ),
-					'view_item'			=> __( 'View Staff','st-business-carry-over-legacy' ),
-					'search_items'		=> __( 'Search Staff','st-business-carry-over-legacy' ),
-					'not_found'			=> __( 'No staff found','st-business-carry-over-legacy' ),
-					'not_found_in_trash' => __( 'No staff found in Trash','st-business-carry-over-legacy' ),
-					'parent'					=> __( 'Parent Staff','st-business-carry-over-legacy' ),
+					'name'					=> __( 'Staff','st-business-carry-over' ),
+					'singular_name'		=> __( 'Staff','st-business-carry-over' ),
+					'add_new'				=> __( 'Add New','st-business-carry-over' ),
+					'add_new_item'	=> __( 'Add New Staff','st-business-carry-over' ),
+					'all_items'				=> __( 'All Staff','st-business-carry-over' ),
+					'edit'						=> __( 'Edit','st-business-carry-over' ),
+					'edit_item'			=> __( 'Edit Staff','st-business-carry-over' ),
+					'new_item'			=> __( 'New Staff','st-business-carry-over' ),
+					'view'					=> __( 'View Staff','st-business-carry-over' ),
+					'view_item'			=> __( 'View Staff','st-business-carry-over' ),
+					'search_items'		=> __( 'Search Staff','st-business-carry-over' ),
+					'not_found'			=> __( 'No staff found','st-business-carry-over' ),
+					'not_found_in_trash' => __( 'No staff found in Trash','st-business-carry-over' ),
+					'parent'					=> __( 'Parent Staff','st-business-carry-over' ),
 				),
 				'supports'				=> array('title','editor','thumbnail'),
 				'has_archive'			=> true,
@@ -294,32 +294,32 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if($news == 'true') {
 			$args = array(
-				'label' 					=> __('Announcements','st-business-carry-over-legacy'),
-				'singular_label'		=> __('Announcement','st-business-carry-over-legacy'),
+				'label' 					=> __('Announcements','st-business-carry-over'),
+				'singular_label'		=> __('Announcement','st-business-carry-over'),
 				'public'					=> true,
 				'show_ui'				=> true,
 				'capability_type'	=> 'post',
 				'hierarchical'			=> false,
 				'rewrite'				=> array(
-						'slug'				=> __('news','st-business-carry-over-legacy'),
+						'slug'				=> __('news','st-business-carry-over'),
 						'with_front'	=> false,
 				),
 				'exclude_from_search' => false,
 				'labels' => array(
-					'name'						=> __( 'Announcements','st-business-carry-over-legacy' ),
-					'singular_name'			=> __( 'Announcement','st-business-carry-over-legacy' ),
-					'add_new'					=> __( 'Add New','st-business-carry-over-legacy' ),
-					'add_new_item'		=> __( 'Add New Announcement','st-business-carry-over-legacy' ),
-					'all_items'					=> __( 'All Announcements','st-business-carry-over-legacy' ),
-					'edit'							=> __( 'Edit','st-business-carry-over-legacy' ),
-					'edit_item'				=> __( 'Edit Announcement','st-business-carry-over-legacy' ),
-					'new_item'				=> __( 'New Announcement','st-business-carry-over-legacy' ),
-					'view'						=> __( 'View Announcement','st-business-carry-over-legacy' ),
-					'view_item'				=> __( 'View Announcement','st-business-carry-over-legacy' ),
-					'search_items'			=> __( 'Search Announcements','st-business-carry-over-legacy' ),
-					'not_found'				=> __( 'No announcement found','st-business-carry-over-legacy' ),
-					'not_found_in_trash'	=> __( 'No announcements found in Trash','st-business-carry-over-legacy' ),
-					'parent'						=> __( 'Parent Announcement','st-business-carry-over-legacy' ),
+					'name'						=> __( 'Announcements','st-business-carry-over' ),
+					'singular_name'			=> __( 'Announcement','st-business-carry-over' ),
+					'add_new'					=> __( 'Add New','st-business-carry-over' ),
+					'add_new_item'		=> __( 'Add New Announcement','st-business-carry-over' ),
+					'all_items'					=> __( 'All Announcements','st-business-carry-over' ),
+					'edit'							=> __( 'Edit','st-business-carry-over' ),
+					'edit_item'				=> __( 'Edit Announcement','st-business-carry-over' ),
+					'new_item'				=> __( 'New Announcement','st-business-carry-over' ),
+					'view'						=> __( 'View Announcement','st-business-carry-over' ),
+					'view_item'				=> __( 'View Announcement','st-business-carry-over' ),
+					'search_items'			=> __( 'Search Announcements','st-business-carry-over' ),
+					'not_found'				=> __( 'No announcement found','st-business-carry-over' ),
+					'not_found_in_trash'	=> __( 'No announcements found in Trash','st-business-carry-over' ),
+					'parent'						=> __( 'Parent Announcement','st-business-carry-over' ),
 				),
 				'supports'			=> array('title','editor','thumbnail'),
 				'has_archive'		=> true,
@@ -330,31 +330,31 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if($services == 'true') {
 			$args = array(
-				'label'				=> __('Services','st-business-carry-over-legacy'),
-				'singular_label'	=> __('Service','st-business-carry-over-legacy'),
+				'label'				=> __('Services','st-business-carry-over'),
+				'singular_label'	=> __('Service','st-business-carry-over'),
 				'public'				=> true,
 				'show_ui'			=> true,
 				'capability_type' => 'post',
 				'hierarchical'		=> false,
 				'rewrite'			=> array(
-							'slug'				=> __('services','st-business-carry-over-legacy'),
+							'slug'				=> __('services','st-business-carry-over'),
 							'with_front'	=> false),
 				'exclude_from_search' => false,
 				'labels' => array(
-					'name'					=> __( 'Services','st-business-carry-over-legacy' ),
-					'singular_name'		=> __( 'Service','st-business-carry-over-legacy' ),
-					'add_new'				=> __( 'Add New','st-business-carry-over-legacy' ),
-					'all_items'				=> __( 'All Services','st-business-carry-over-legacy' ),
-					'add_new_item'	=> __( 'Add New Service','st-business-carry-over-legacy' ),
-					'edit'						=> __( 'Edit','st-business-carry-over-legacy' ),
-					'edit_item'			=> __( 'Edit Service','st-business-carry-over-legacy' ),
-					'new_item'			=> __( 'New Service','st-business-carry-over-legacy' ),
-					'view'					=> __( 'View Services','st-business-carry-over-legacy' ),
-					'view_item'			=> __( 'View Service','st-business-carry-over-legacy' ),
-					'search_items'		=> __( 'Search Services','st-business-carry-over-legacy' ),
-					'not_found'			=> __( 'No services found','st-business-carry-over-legacy' ),
-					'not_found_in_trash' => __( 'No services found in Trash','st-business-carry-over-legacy' ),
-					'parent'					=> __( 'Parent Service','st-business-carry-over-legacy' ),
+					'name'					=> __( 'Services','st-business-carry-over' ),
+					'singular_name'		=> __( 'Service','st-business-carry-over' ),
+					'add_new'				=> __( 'Add New','st-business-carry-over' ),
+					'all_items'				=> __( 'All Services','st-business-carry-over' ),
+					'add_new_item'	=> __( 'Add New Service','st-business-carry-over' ),
+					'edit'						=> __( 'Edit','st-business-carry-over' ),
+					'edit_item'			=> __( 'Edit Service','st-business-carry-over' ),
+					'new_item'			=> __( 'New Service','st-business-carry-over' ),
+					'view'					=> __( 'View Services','st-business-carry-over' ),
+					'view_item'			=> __( 'View Service','st-business-carry-over' ),
+					'search_items'		=> __( 'Search Services','st-business-carry-over' ),
+					'not_found'			=> __( 'No services found','st-business-carry-over' ),
+					'not_found_in_trash' => __( 'No services found in Trash','st-business-carry-over' ),
+					'parent'					=> __( 'Parent Service','st-business-carry-over' ),
 					),
 				'supports'					=> array('title','editor','thumbnail'),
 				'has_archive'				=> true,
@@ -370,17 +370,17 @@ class ST_Business_Carry_Over_Legacy{
 	 */
 	function taxonomies() {
 		$category_labels = array(
-			'name'						=> __( 'Service Categories', 'st-business-carry-over-legacy' ),
-			'singular_name'			=>__( 'Service Category', 'st-business-carry-over-legacy' ),
-			'search_items'			=> __( 'Search Service Categories', 'st-business-carry-over-legacy' ),
-			'all_items'					=> __( 'All Service Categories', 'st-business-carry-over-legacy' ),
-			'parent_item'			=> __( 'Service Parent Category', 'st-business-carry-over-legacy' ),
-			'parent_item_colon'	=> __( 'Service Parent Category:', 'st-business-carry-over-legacy' ),
-			'edit_item'				=> __( 'Edit Service Category', 'st-business-carry-over-legacy' ),
-			'update_item'			=> __( 'Update Service Category', 'st-business-carry-over-legacy' ),
-			'add_new_item'		=> __( 'Add New Service Category', 'st-business-carry-over-legacy' ),
-			'new_item_name'		=> __( 'New Service Category Name', 'st-business-carry-over-legacy' ),
-			'menu_name'			=> __( 'Service Categories', 'st-business-carry-over-legacy' ),
+			'name'						=> __( 'Service Categories', 'st-business-carry-over' ),
+			'singular_name'			=>__( 'Service Category', 'st-business-carry-over' ),
+			'search_items'			=> __( 'Search Service Categories', 'st-business-carry-over' ),
+			'all_items'					=> __( 'All Service Categories', 'st-business-carry-over' ),
+			'parent_item'			=> __( 'Service Parent Category', 'st-business-carry-over' ),
+			'parent_item_colon'	=> __( 'Service Parent Category:', 'st-business-carry-over' ),
+			'edit_item'				=> __( 'Edit Service Category', 'st-business-carry-over' ),
+			'update_item'			=> __( 'Update Service Category', 'st-business-carry-over' ),
+			'add_new_item'		=> __( 'Add New Service Category', 'st-business-carry-over' ),
+			'new_item_name'		=> __( 'New Service Category Name', 'st-business-carry-over' ),
+			'menu_name'			=> __( 'Service Categories', 'st-business-carry-over' ),
 		);
 		$category_args = apply_filters( 'smartestthemes_service_category_args', array(
 			'hierarchical'					=> true,
@@ -422,8 +422,8 @@ class ST_Business_Carry_Over_Legacy{
 				'post_status' => 'publish',
 				'post_type' => 'page',
 				'post_author' => 1,
-				'post_name' => esc_sql( _x('reviews', 'page_slug', 'st-business-carry-over-legacy') ),
-				'post_title' => __('Reviews', 'st-business-carry-over-legacy'),
+				'post_name' => esc_sql( _x('reviews', 'page_slug', 'st-business-carry-over') ),
+				'post_title' => __('Reviews', 'st-business-carry-over'),
 				'post_content' => '[smartest_reviews]',
 				'post_parent' => 0,
 				'comment_status' => 'closed'
@@ -461,7 +461,7 @@ class ST_Business_Carry_Over_Legacy{
 
 				if ( $about_pic ) {
 				
-					$about_pic_out = '<figure><img src="' . $about_pic . '" alt="' . __( 'About us', 'st-business-carry-over-legacy' ) . '" /></figure><br />';
+					$about_pic_out = '<figure><img src="' . $about_pic . '" alt="' . __( 'About us', 'st-business-carry-over' ) . '" /></figure><br />';
 					
 				}
 				
@@ -502,46 +502,46 @@ class ST_Business_Carry_Over_Legacy{
 
 		$meta_boxes[] = array(
 			'id'         => 'staff_details',
-			'title'      => __('Details', 'st-business-carry-over-legacy'),
+			'title'      => __('Details', 'st-business-carry-over'),
 			'pages'      => array( 'smartest_staff', ), // Post type
 			'context'    => 'normal',
 			'priority'   => 'high',
 			'show_names' => true,
 			'fields'     => array(
 				array(
-					'name' => __('Job Title', 'st-business-carry-over-legacy'),
-					'desc' => __('The staff member\'s job title. Optional', 'st-business-carry-over-legacy'),
+					'name' => __('Job Title', 'st-business-carry-over'),
+					'desc' => __('The staff member\'s job title. Optional', 'st-business-carry-over'),
 					'id'   => $prefix . 'staff_job_title',
 					'type' => 'text_medium',
 				),
 				array(
-					'name' => __( 'Sort Order Number', 'st-business-carry-over-legacy' ),
-					'desc' => __( 'Give this person a number to order them on the list on the staff page and in the staff widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new staff members later without having to change everyone\'s current number.', 'st-business-carry-over-legacy' ),
+					'name' => __( 'Sort Order Number', 'st-business-carry-over' ),
+					'desc' => __( 'Give this person a number to order them on the list on the staff page and in the staff widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new staff members later without having to change everyone\'s current number.', 'st-business-carry-over' ),
 					'id'   => $prefix . 'staff-order-number',
 					'type' => 'text',
 					'std' => 9999
 				),
 				array(
-					'name' => __('Facebook Profile ID', 'st-business-carry-over-legacy'),
-					'desc' => __('The staff member\'s Facebook profile ID. Optional', 'st-business-carry-over-legacy'),
+					'name' => __('Facebook Profile ID', 'st-business-carry-over'),
+					'desc' => __('The staff member\'s Facebook profile ID. Optional', 'st-business-carry-over'),
 					'id'   => $prefix . 'staff_facebook',
 					'type' => 'text_medium',
 				),
 				array(
-					'name' => __('Twitter Username', 'st-business-carry-over-legacy'),
-					'desc' => __('The staff member\'s Twitter username. Optional', 'st-business-carry-over-legacy'),
+					'name' => __('Twitter Username', 'st-business-carry-over'),
+					'desc' => __('The staff member\'s Twitter username. Optional', 'st-business-carry-over'),
 					'id'   => $prefix . 'staff_twitter',
 					'type' => 'text_medium',
 				),
 				array(
-					'name' => __('Google Plus Profile ID', 'st-business-carry-over-legacy'),
-					'desc' => __('The staff member\'s Google Plus profile ID. Optional', 'st-business-carry-over-legacy'),
+					'name' => __('Google Plus Profile ID', 'st-business-carry-over'),
+					'desc' => __('The staff member\'s Google Plus profile ID. Optional', 'st-business-carry-over'),
 					'id'   => $prefix . 'staff_gplus',
 					'type' => 'text_medium',
 				),
 				 array(
-					'name' => __('Linkedin Profile', 'st-business-carry-over-legacy'),
-					'desc' => __('The part of the profile address after "www.linkedin.com/". Optional', 'st-business-carry-over-legacy'),
+					'name' => __('Linkedin Profile', 'st-business-carry-over'),
+					'desc' => __('The part of the profile address after "www.linkedin.com/". Optional', 'st-business-carry-over'),
 					'id' => $prefix . 'staff_linkedin',
 					'type' => 'text_medium',
 				)
@@ -551,15 +551,15 @@ class ST_Business_Carry_Over_Legacy{
 		// services 'featured' meta box
 		$meta_boxes[] = array(
 			'id'         => 'featured_svcs',
-			'title'      => __('Featured Services', 'st-business-carry-over-legacy'),
+			'title'      => __('Featured Services', 'st-business-carry-over'),
 			'pages'      => array( 'smartest_services', ),
 			'context'    => 'side',
 			'priority'   => 'default',//high, core, default, low
 			'show_names' => true,
 			'fields'     => array(
 				array(
-					'name' => __('Feature this?', 'st-business-carry-over-legacy'),
-					'desc' => __('Check this box to feature this service in the list of featured services on the home page and in the Featured Services widget.', 'st-business-carry-over-legacy'),
+					'name' => __('Feature this?', 'st-business-carry-over'),
+					'desc' => __('Check this box to feature this service in the list of featured services on the home page and in the Featured Services widget.', 'st-business-carry-over'),
 					'id'   => $prefix . 'services_featured',
 					'type' => 'checkbox',
 				),
@@ -569,15 +569,15 @@ class ST_Business_Carry_Over_Legacy{
 		if( get_option('smartestb_enable_service_sort') == 'true' ) { 			
 			$meta_boxes[] = array(
 				'id'         => 'services-sort-order',
-				'title'      => __( 'Set a Sort-Order', 'st-business-carry-over-legacy' ),
+				'title'      => __( 'Set a Sort-Order', 'st-business-carry-over' ),
 				'pages'      => array( 'smartest_services' ),
 				'context'    => 'normal',
 				'priority'   => 'high',//high, core, default, low
 				'show_names' => true,
 				'fields'     => array(
 					array(
-						'name' => __( 'Sort Order Number', 'st-business-carry-over-legacy' ),
-						'desc' => __( 'Give this service a number to order it on the list on the service page and in the services widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new services later without having to change all current numbers.', 'st-business-carry-over-legacy' ),
+						'name' => __( 'Sort Order Number', 'st-business-carry-over' ),
+						'desc' => __( 'Give this service a number to order it on the list on the service page and in the services widget. Numbers do not have to be consecutive; for example, you could number them like, 10, 20, 35, 45, etc. This would leave room to insert new services later without having to change all current numbers.', 'st-business-carry-over' ),
 						'id'   => $prefix . 'service-order-number',
 						'type' => 'text',
 						'std' => 9999
@@ -588,15 +588,15 @@ class ST_Business_Carry_Over_Legacy{
 		
 		$meta_boxes[] = array(
 			'id'         => 'featured_news',
-			'title'      => __('Featured News', 'st-business-carry-over-legacy'),
+			'title'      => __('Featured News', 'st-business-carry-over'),
 			'pages'      => array( 'smartest_news', ),
 			'context'    => 'side',
 			'priority'   => 'default',
 			'show_names' => true, // Show field names on the left
 			'fields'     => array(
 				array(
-					'name' => __('Feature this?', 'st-business-carry-over-legacy'),
-					'desc' => __('Check this box to feature this announcement in the Featured Announcements widget.', 'st-business-carry-over-legacy'),
+					'name' => __('Feature this?', 'st-business-carry-over'),
+					'desc' => __('Check this box to feature this announcement in the Featured Announcements widget.', 'st-business-carry-over'),
 					'id'   => $prefix . 'news_featured',
 					'type' => 'checkbox',
 				),
@@ -621,7 +621,7 @@ class ST_Business_Carry_Over_Legacy{
 	public function change_staff_enter_title( $title ){
 		$screen = get_current_screen();
 		if  ( 'smartest_staff' == $screen->post_type ) {
-			$title = __('Enter staff member\'s name here', 'st-business-carry-over-legacy');
+			$title = __('Enter staff member\'s name here', 'st-business-carry-over');
 		}
 		return $title;
 	}
@@ -671,9 +671,9 @@ class ST_Business_Carry_Over_Legacy{
 function smar_manage_edit_staff_columns( $columns ) {
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __('Name', 'st-business-carry-over-legacy'),
-		'jobtitle' => __('Job Title', 'st-business-carry-over-legacy'),
-		'date' => __('Date', 'st-business-carry-over-legacy')
+		'title' => __('Name', 'st-business-carry-over'),
+		'jobtitle' => __('Job Title', 'st-business-carry-over'),
+		'date' => __('Date', 'st-business-carry-over')
 	);
 
 	return $columns;
@@ -702,10 +702,10 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	function smar_manage_edit_services_columns( $columns ) {
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
-			'title' => __('Title', 'st-business-carry-over-legacy'),
-			'taxonomy-smartest_service_category' => __('Categories', 'st-business-carry-over-legacy'),
-			'featureds' => __('Featured', 'st-business-carry-over-legacy'),
-			'date' => __('Date', 'st-business-carry-over-legacy')
+			'title' => __('Title', 'st-business-carry-over'),
+			'taxonomy-smartest_service_category' => __('Categories', 'st-business-carry-over'),
+			'featureds' => __('Featured', 'st-business-carry-over'),
+			'date' => __('Date', 'st-business-carry-over')
 		);
 		return $columns;
 	}
@@ -720,7 +720,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			case 'featureds' :
 				$sf = get_post_meta( $post_id, '_smab_services_featured', true );
 				if ( $sf )
-					_e('Featured', 'st-business-carry-over-legacy');
+					_e('Featured', 'st-business-carry-over');
 				break;
 			default :
 				break;
@@ -734,9 +734,9 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	function smar_manage_edit_news_columns( $columns ) {
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
-			'title' => __('Title', 'st-business-carry-over-legacy'),
-			'featuredn' => __('Featured', 'st-business-carry-over-legacy'),
-			'date' => __('Date', 'st-business-carry-over-legacy')
+			'title' => __('Title', 'st-business-carry-over'),
+			'featuredn' => __('Featured', 'st-business-carry-over'),
+			'date' => __('Date', 'st-business-carry-over')
 		);
 		return $columns;
 	}
@@ -751,7 +751,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			case 'featuredn' :
 				$sf = get_post_meta( $post_id, '_smab_news_featured', true );
 				if ( $sf )
-					_e('Featured', 'st-business-carry-over-legacy');
+					_e('Featured', 'st-business-carry-over');
 				break;
 			default :
 				break;
@@ -808,8 +808,8 @@ function smar_manage_staff_columns( $column, $post_id ) {
 
 		?>
 	<div class="wrap" id="smartestthemes-container">
-	<div id="smartestthemes-popup-save" class="smartestthemes-save-popup"><div class="smartestthemes-save-save"><?php _e('Options Updated', 'st-business-carry-over-legacy'); ?></div></div>
-	<div id="smartestthemes-popup-reset" class="smartestthemes-save-popup"><div class="smartestthemes-save-reset"><?php _e('Options Reset', 'st-business-carry-over-legacy'); ?></div></div>
+	<div id="smartestthemes-popup-save" class="smartestthemes-save-popup"><div class="smartestthemes-save-save"><?php _e('Options Updated', 'st-business-carry-over'); ?></div></div>
+	<div id="smartestthemes-popup-reset" class="smartestthemes-save-popup"><div class="smartestthemes-save-reset"><?php _e('Options Reset', 'st-business-carry-over'); ?></div></div>
 		<form action="" enctype="multipart/form-data" id="smartestform">
 			<div id="header">
 			   <div class="logo">
@@ -818,7 +818,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			  </div>
 				 <div class="theme-info">
 					<span class="theme" style="margin-top:10px;">ST Business Carry Over Legacy
-							<span class="ver"> <?php printf(__('version %s', 'st-business-carry-over-legacy'), $version); ?>
+							<span class="ver"> <?php printf(__('version %s', 'st-business-carry-over'), $version); ?>
 	</span>						
 					</span>
 					
@@ -835,7 +835,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	<![endif]-->
 				<ul>
 				<li class="right"><img style="display:none" src="<?php echo $image_dir; ?>loading-top.gif" class="ajax-loading-img ajax-loading-img-top" alt="Working..." />
-	<input type="submit" value="<?php _e( 'Save All Changes', 'st-business-carry-over-legacy' ); ?>" class="button submit-button" /></li>
+	<input type="submit" value="<?php _e( 'Save All Changes', 'st-business-carry-over' ); ?>" class="button submit-button" /></li>
 				</ul> 
 	<!--[if IE]>
 	</div>
@@ -858,11 +858,11 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			<img style="display:none" src="<?php echo $image_dir; ?>loading-bottom.gif" class="ajax-loading-img ajax-loading-img-bottom" alt="Working..." />
 			
 			
-			<input type="submit" value="<?php _e( 'Save All Changes', 'st-business-carry-over-legacy' ); ?>" class="button submit-button" />        
+			<input type="submit" value="<?php _e( 'Save All Changes', 'st-business-carry-over' ); ?>" class="button submit-button" />        
 			</form>
 			<form action="<?php echo esc_html( $_SERVER['REQUEST_URI'] ) ?>" method="post" style="display:inline" id="smartestform-reset">
 				<span class="submit-footer-reset">
-				<input name="reset" type="submit" value="<?php _e( 'Reset Options', 'st-business-carry-over-legacy' ); ?>" class="button submit-button reset-button" onclick="return confirm(localized_label.reset);" />
+				<input name="reset" type="submit" value="<?php _e( 'Reset Options', 'st-business-carry-over' ); ?>" class="button submit-button reset-button" onclick="return confirm(localized_label.reset);" />
 				<input type="hidden" name="smartestthemes_save" value="reset" /> 
 				</span></form></div><!--[if IE 6]></div><![endif]--><div style="clear:both;"></div>    
 	</div><!--wrap-->
@@ -882,7 +882,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			<link rel="stylesheet" type="text/css" href="<?php echo plugins_url( '/admin-style.css', __FILE__ ); ?>" media="screen" />
 			<?php 
 			// Localize for js
-			$local_str = __('Click OK to reset back to default settings. All custom plugin settings will be lost!', 'st-business-carry-over-legacy');
+			$local_str = __('Click OK to reset back to default settings. All custom plugin settings will be lost!', 'st-business-carry-over');
 			?>
 			<script>
 				var localized_label = {

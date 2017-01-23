@@ -42,9 +42,9 @@ class SMARTESTReviewsLegacy {
     }
 
     function addmenu() {
-        add_options_page(__('Reviews', 'st-business-carry-over-legacy'), __('Reviews', 'st-business-carry-over-legacy'), 'manage_options', 'smar_options', array(&$this, 'admin_options'));
+        add_options_page(__('Reviews', 'st-business-carry-over'), __('Reviews', 'st-business-carry-over'), 'manage_options', 'smar_options', array(&$this, 'admin_options'));
 		if(get_option('smartestb_add_reviews') == 'true') {       
-			add_menu_page(__('Reviews', 'st-business-carry-over-legacy'), __('Reviews', 'st-business-carry-over-legacy'), 'edit_others_posts', 'smar_view_reviews', array(&$this, 'admin_view_reviews'), 'dashicons-star-filled', 62);
+			add_menu_page(__('Reviews', 'st-business-carry-over'), __('Reviews', 'st-business-carry-over'), 'edit_others_posts', 'smar_view_reviews', array(&$this, 'admin_view_reviews'), 'dashicons-star-filled', 62);
 		}
    }
     function admin_options() {
@@ -84,15 +84,15 @@ class SMARTESTReviewsLegacy {
             'dbversion' => 0,
             'field_custom' => array(),
             'form_location' => 0,
-            'goto_leave_text' => __('Click here to submit your review.', 'st-business-carry-over-legacy'),
+            'goto_leave_text' => __('Click here to submit your review.', 'st-business-carry-over'),
             'goto_show_button' => 1,
-            'leave_text' => __('Submit your review', 'st-business-carry-over-legacy'),
+            'leave_text' => __('Submit your review', 'st-business-carry-over'),
             'require_custom' => array(),
             'require_fields' => array('fname' => 1, 'femail' => 1, 'fwebsite' => 0, 'ftitle' => 0, 'fage' => 0, 'fgender' => 0),
             'reviews_per_page' => 10,
             'show_custom' => array(),
             'show_fields' => array('fname' => 1, 'femail' => 0, 'fwebsite' => 0, 'ftitle' => 1, 'fage' => 0, 'fgender' => 0),
-            'submit_button_text' => __('Submit your review', 'st-business-carry-over-legacy'),
+            'submit_button_text' => __('Submit your review', 'st-business-carry-over'),
             'title_tag' => 'h2'
         );
          $this->options = get_option('smar_options', $default_options);
@@ -222,7 +222,7 @@ class SMARTESTReviewsLegacy {
 
         /* make sure we have at least one review before continuing below */
         if ($wpdb->num_rows == 0 || $row[0]->total == 0) {
-            $this->got_aggregate = array("aggregate" => 0, "max" => 0, "total" => 0, "text" => __('Reviews for my site', 'st-business-carry-over-legacy'));
+            $this->got_aggregate = array("aggregate" => 0, "max" => 0, "total" => 0, "text" => __('Reviews for my site', 'st-business-carry-over'));
             return false;
         }
         $aggregate_rating = $row[0]->aggregate_rating;
@@ -292,12 +292,12 @@ class SMARTESTReviewsLegacy {
 		
 		
 		// do agg rating for all scenarios
-		$aggregate_footer_output .= '<br /><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate"> '. __('Average rating:', 'st-business-carry-over-legacy'). ' <span itemprop="ratingValue" class="average">' . $average_score . '</span> ' . __('out of', 'st-business-carry-over-legacy'). ' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over-legacy').' <span itemprop="ratingCount">' . $this->got_aggregate["total"] . ' </span>';
+		$aggregate_footer_output .= '<br /><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate"> '. __('Average rating:', 'st-business-carry-over'). ' <span itemprop="ratingValue" class="average">' . $average_score . '</span> ' . __('out of', 'st-business-carry-over'). ' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over').' <span itemprop="ratingCount">' . $this->got_aggregate["total"] . ' </span>';
 		if($this->got_aggregate["total"] == 1)
-			$basedon = __('review.', 'st-business-carry-over-legacy');
+			$basedon = __('review.', 'st-business-carry-over');
 		else
-			$basedon = __('reviews.', 'st-business-carry-over-legacy');
-		$aggregate_footer_output .= sprintf(__('%s', 'st-business-carry-over-legacy'), $basedon). '</span>';
+			$basedon = __('reviews.', 'st-business-carry-over');
+		$aggregate_footer_output .= sprintf(__('%s', 'st-business-carry-over'), $basedon). '</span>';
 		$aggregate_footer_output .= '</div></div><!-- end agg footer -->';
 		return $aggregate_footer_output;
 
@@ -342,7 +342,7 @@ class SMARTESTReviewsLegacy {
                 } /* page is using get variables for pageid */
             }
 
-            $out .= '<div id="smar_pagination"><div id="smar_pagination_page">'. __('Page: ', 'st-business-carry-over-legacy'). '</div>';
+            $out .= '<div id="smar_pagination"><div id="smar_pagination_page">'. __('Page: ', 'st-business-carry-over'). '</div>';
 
             if ($paged > 2 && $paged > $range + 1 && $showitems < $pages) {
                 if ($uri && $pretty) {
@@ -430,9 +430,9 @@ class SMARTESTReviewsLegacy {
                                     <span itemprop="addressCountry">' . $smartestb_options['smartestb_address_country'] . '</span></span></span><hr />';
         }
         if (count($reviews) == 0) {
-            $reviews_content .= '<p>'. __('There are no reviews yet. Be the first to leave yours!', 'st-business-carry-over-legacy').'</p>';
+            $reviews_content .= '<p>'. __('There are no reviews yet. Be the first to leave yours!', 'st-business-carry-over').'</p>';
         } elseif ($smartestb_options['smartestb_add_reviews'] == 'false') {
-				$reviews_content .= '<p>'.__('Reviews are not available.', 'st-business-carry-over-legacy').'</p>';
+				$reviews_content .= '<p>'.__('Reviews are not available.', 'st-business-carry-over').'</p>';
         } else {// isa depend itemtype, phone, addy
 	   		$postid = get_option('smartest_reviews_page_id');
             $this->get_aggregate_reviews($postid);
@@ -460,11 +460,11 @@ class SMARTESTReviewsLegacy {
                 
                 $hide_name = '';
                 if ($this->options['show_fields']['fname'] == 0) {
-                    $review->reviewer_name = __('Anonymous', 'st-business-carry-over-legacy');
+                    $review->reviewer_name = __('Anonymous', 'st-business-carry-over');
                     $hide_name = 'smar_hide';
                 }
                 if ($review->reviewer_name == '') {
-                    $review->reviewer_name = __('Anonymous', 'st-business-carry-over-legacy');
+                    $review->reviewer_name = __('Anonymous', 'st-business-carry-over');
                 }
 
                 if ($this->options['show_fields']['fwebsite'] == 1 && $review->reviewer_url != '') {
@@ -490,7 +490,7 @@ class SMARTESTReviewsLegacy {
                 if ($hide_response == 0)
                 {
                     if (strlen($review->review_response) > 0) {
-                        $review_response = '<p class="response"><strong>'.__('Response:', 'st-business-carry-over-legacy').'</strong> ' . nl2br($review->review_response) . '</p>';
+                        $review_response = '<p class="response"><strong>'.__('Response:', 'st-business-carry-over').'</strong> ' . nl2br($review->review_response) . '</p>';
                     }
                 }
 
@@ -517,20 +517,20 @@ class SMARTESTReviewsLegacy {
                     $custom_shown = preg_replace("%&bull;&nbsp;</div>$%si","</div><div class='smar_clear'></div>",$custom_shown);
                 }// if 0 hide
 
-                $name_block = '' .'<div class="smar_fl smar_rname">' .'<abbr title="' . $this->iso8601(strtotime($review->date_time)) . '" itemprop="datePublished">' . date("M d, Y", strtotime($review->date_time)) . '</abbr>&nbsp;' .'<span class="' . $hide_name . '">'. __('by', 'st-business-carry-over-legacy').'</span>&nbsp;' . '<span class="isa_vcard" id="hreview-smar-reviewer-' . $review->id . '">' . '<span class="' . $hide_name . '" itemprop="author">' . $review->reviewer_name . '</span>' . '</span>' . '<div class="smar_clear"></div>' .
+                $name_block = '' .'<div class="smar_fl smar_rname">' .'<abbr title="' . $this->iso8601(strtotime($review->date_time)) . '" itemprop="datePublished">' . date("M d, Y", strtotime($review->date_time)) . '</abbr>&nbsp;' .'<span class="' . $hide_name . '">'. __('by', 'st-business-carry-over').'</span>&nbsp;' . '<span class="isa_vcard" id="hreview-smar-reviewer-' . $review->id . '">' . '<span class="' . $hide_name . '" itemprop="author">' . $review->reviewer_name . '</span>' . '</span>' . '<div class="smar_clear"></div>' .
  $custom_shown . '</div>';
 
-                    $reviews_content .= '<div itemprop="review" itemscope itemtype="http://schema.org/Review" id="hreview-' . $review->id . '"><' . $title_tag . ' itemprop="description" class="summary ' . $hidesummary . '">' . $review->review_title . '</' . $title_tag . '><div class="smar_fl smar_sc"><div class="smar_rating">' . $this->output_rating($review->review_rating, false) . '</div></div>' . $name_block . '<div class="smar_clear smar_spacing1"></div><blockquote itemprop="reviewBody" class="description"><p>' . $review->review_text . ' '.__('Rating:', 'st-business-carry-over-legacy').' <span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><span itemprop="ratingValue">'.$review->review_rating.'</span></span>  '.__('out of 5.', 'st-business-carry-over-legacy').'</p></blockquote>' . $review_response . '</div><hr />';
+                    $reviews_content .= '<div itemprop="review" itemscope itemtype="http://schema.org/Review" id="hreview-' . $review->id . '"><' . $title_tag . ' itemprop="description" class="summary ' . $hidesummary . '">' . $review->review_title . '</' . $title_tag . '><div class="smar_fl smar_sc"><div class="smar_rating">' . $this->output_rating($review->review_rating, false) . '</div></div>' . $name_block . '<div class="smar_clear smar_spacing1"></div><blockquote itemprop="reviewBody" class="description"><p>' . $review->review_text . ' '.__('Rating:', 'st-business-carry-over').' <span itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><span itemprop="ratingValue">'.$review->review_rating.'</span></span>  '.__('out of 5.', 'st-business-carry-over').'</p></blockquote>' . $review_response . '</div><hr />';
 
             }//  foreach ($reviews as $review)
 
-                $reviews_content .= '<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate">'. __('Average rating:', 'st-business-carry-over-legacy').' <span itemprop="ratingValue">' . $average_score . '</span> '. __('out of', 'st-business-carry-over-legacy').' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over-legacy').' <span itemprop="reviewCount">' . $this->got_aggregate["total"] . '</span> ';
+                $reviews_content .= '<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" id="hreview-smar-aggregate">'. __('Average rating:', 'st-business-carry-over').' <span itemprop="ratingValue">' . $average_score . '</span> '. __('out of', 'st-business-carry-over').' <span itemprop="bestRating">' . $best_score . ' </span> '. __('based on', 'st-business-carry-over').' <span itemprop="reviewCount">' . $this->got_aggregate["total"] . '</span> ';
 
 					if($this->got_aggregate["total"] == 1)
-					    $basedon = __('review.', 'st-business-carry-over-legacy');
+					    $basedon = __('review.', 'st-business-carry-over');
 					else
-					    $basedon = __('reviews.', 'st-business-carry-over-legacy');
-					$reviews_content .= sprintf(__('%s', 'st-business-carry-over-legacy'), $basedon). '</span>';
+					    $basedon = __('reviews.', 'st-business-carry-over');
+					$reviews_content .= sprintf(__('%s', 'st-business-carry-over'), $basedon). '</span>';
 
  // add closing wrapper div for business microdata type
 			$reviews_content .= '</div><!-- for business microdata type, only if there are rev -->';
@@ -633,7 +633,7 @@ function shortcode_smar_insert() {
             } else {
                 $req = '';
             }
-            $fields .= '<tr><td><label for="' . $rand_prefixes[0] . '-fname" class="comment-field">'. __('Name:', 'st-business-carry-over-legacy').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[0] . '-fname" name="' . $rand_prefixes[0] . '-fname" value="' . $this->p->fname . '" /></td></tr>';
+            $fields .= '<tr><td><label for="' . $rand_prefixes[0] . '-fname" class="comment-field">'. __('Name:', 'st-business-carry-over').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[0] . '-fname" name="' . $rand_prefixes[0] . '-fname" value="' . $this->p->fname . '" /></td></tr>';
         }
         if ($this->options['ask_fields']['femail'] == 1) {
             if ($this->options['require_fields']['femail'] == 1) {
@@ -641,7 +641,7 @@ function shortcode_smar_insert() {
             } else {
                 $req = '';
             }
-            $fields .= '<tr><td><label for="' . $rand_prefixes[1] . '-femail" class="comment-field">'. __('Email:', 'st-business-carry-over-legacy').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[1] . '-femail" name="' . $rand_prefixes[1] . '-femail" value="' . $this->p->femail . '" /></td></tr>';
+            $fields .= '<tr><td><label for="' . $rand_prefixes[1] . '-femail" class="comment-field">'. __('Email:', 'st-business-carry-over').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[1] . '-femail" name="' . $rand_prefixes[1] . '-femail" value="' . $this->p->femail . '" /></td></tr>';
         }
         if ($this->options['ask_fields']['fwebsite'] == 1) {
             if ($this->options['require_fields']['fwebsite'] == 1) {
@@ -649,7 +649,7 @@ function shortcode_smar_insert() {
             } else {
                 $req = '';
             }
-            $fields .= '<tr><td><label for="' . $rand_prefixes[2] . '-fwebsite" class="comment-field">'. __('Website:', 'st-business-carry-over-legacy').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[2] . '-fwebsite" name="' . $rand_prefixes[2] . '-fwebsite" value="' . $this->p->fwebsite . '" /></td></tr>';
+            $fields .= '<tr><td><label for="' . $rand_prefixes[2] . '-fwebsite" class="comment-field">'. __('Website:', 'st-business-carry-over').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[2] . '-fwebsite" name="' . $rand_prefixes[2] . '-fwebsite" value="' . $this->p->fwebsite . '" /></td></tr>';
         }
         if ($this->options['ask_fields']['ftitle'] == 1) {
             if ($this->options['require_fields']['ftitle'] == 1) {
@@ -657,7 +657,7 @@ function shortcode_smar_insert() {
             } else {
                 $req = '';
             }
-            $fields .= '<tr><td><label for="' . $rand_prefixes[3] . '-ftitle" class="comment-field">'. __('Review Title:', 'st-business-carry-over-legacy').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[3] . '-ftitle" name="' . $rand_prefixes[3] . '-ftitle" maxlength="150" value="' . $this->p->ftitle . '" /></td></tr>';
+            $fields .= '<tr><td><label for="' . $rand_prefixes[3] . '-ftitle" class="comment-field">'. __('Review Title:', 'st-business-carry-over').' ' . $req . '</label></td><td><input class="text-input" type="text" id="' . $rand_prefixes[3] . '-ftitle" name="' . $rand_prefixes[3] . '-ftitle" maxlength="150" value="' . $this->p->ftitle . '" /></td></tr>';
         }
 
         $custom_fields = array(); /* used for insert as well */
@@ -688,14 +688,14 @@ function shortcode_smar_insert() {
             if ($val == 1) {
                 $col = str_replace("'","\'",$col);
                 $req_js .= "smar_req.push('$col');";
-                $some_required = '<small>* '. __('Required Field', 'st-business-carry-over-legacy').'</small>';
+                $some_required = '<small>* '. __('Required Field', 'st-business-carry-over').'</small>';
             }
         }
 
         foreach ($this->options['require_custom'] as $i => $val) {
             if ($val == 1) {
                 $req_js .= "smar_req.push('custom_$i');";
-                $some_required = '<small>* '. __('Required Field', 'st-business-carry-over-legacy').'</small>';
+                $some_required = '<small>* '. __('Required Field', 'st-business-carry-over').'</small>';
             }
         }
         
@@ -719,19 +719,19 @@ function shortcode_smar_insert() {
 
         $out2 = '   
             <tr>
-                <td><label class="comment-field">'. __('Rating:', 'st-business-carry-over-legacy').'</label></td>
+                <td><label class="comment-field">'. __('Rating:', 'st-business-carry-over').'</label></td>
                 <td><div class="smar_rating">' . $this->output_rating(0, true) . '</div></td>
             </tr>';
 
         $out3 = '
-                            <tr><td colspan="2"><label for="' . $rand_prefixes[5] . '-ftext" class="comment-field">'. __('Review:', 'st-business-carry-over-legacy').'</label></td></tr>
+                            <tr><td colspan="2"><label for="' . $rand_prefixes[5] . '-ftext" class="comment-field">'. __('Review:', 'st-business-carry-over').'</label></td></tr>
                             <tr><td colspan="2"><textarea id="' . $rand_prefixes[5] . '-ftext" name="' . $rand_prefixes[5] . '-ftext" rows="8" cols="50">' . $this->p->ftext . '</textarea></td></tr>
                             <tr>
                                 <td colspan="2" id="smar_check_confirm">
                                     ' . $some_required . '
                                     <div class="smar_clear"></div>    
                                     <input type="checkbox" name="' . $rand_prefixes[6] . '-fconfirm1" id="fconfirm1" value="1" />
-                                    <div class="smar_fl"><input type="checkbox" name="' . $rand_prefixes[7] . '-fconfirm2" id="fconfirm2" value="1" /></div><div class="smar_fl" style="margin:-2px 0px 0px 5px"><label for="fconfirm2">'. __('Check this box to confirm you are human.', 'st-business-carry-over-legacy').'</label></div>
+                                    <div class="smar_fl"><input type="checkbox" name="' . $rand_prefixes[7] . '-fconfirm2" id="fconfirm2" value="1" /></div><div class="smar_fl" style="margin:-2px 0px 0px 5px"><label for="fconfirm2">'. __('Check this box to confirm you are human.', 'st-business-carry-over').'</label></div>
                                     <div class="smar_clear"></div>
                                     <input type="checkbox" name="' . $rand_prefixes[8] . '-fconfirm3" id="fconfirm3" value="1" />
                                 </td>
@@ -795,7 +795,7 @@ function shortcode_smar_insert() {
             if ($val == 1) {
                 if (!isset($this->p->$col) || $this->p->$col == '') {
                     $nice_name = ucfirst(substr($col, 1));
-                    $errors .= __('You must include your', 'st-business-carry-over-legacy').' ' . $nice_name . '.<br />';
+                    $errors .= __('You must include your', 'st-business-carry-over').' ' . $nice_name . '.<br />';
                 }
             }
         }
@@ -811,7 +811,7 @@ function shortcode_smar_insert() {
                 $custom_i = "custom_$i";
                 if (!isset($this->p->$custom_i) || $this->p->$custom_i == '') {
                     $nice_name = $custom_fields[$i];
-                    $errors .= __('You must include your', 'st-business-carry-over-legacy').' ' . $nice_name . '.<br />';
+                    $errors .= __('You must include your', 'st-business-carry-over').' ' . $nice_name . '.<br />';
                 }
             }
         }
@@ -819,31 +819,31 @@ function shortcode_smar_insert() {
         /* only do regex matching if not blank */
         if ($this->p->femail != '' && $this->options['ask_fields']['femail'] == 1) {
             if (!preg_match('/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/', $this->p->femail)) {
-                $errors .= __('The email address provided is not valid.', 'st-business-carry-over-legacy').'<br />';
+                $errors .= __('The email address provided is not valid.', 'st-business-carry-over').'<br />';
             }
         }
 
         /* only do regex matching if not blank */
         if ($this->p->fwebsite != '' && $this->options['ask_fields']['fwebsite'] == 1) {
             if (!preg_match('/^\S+:\/\/\S+\.\S+.+$/', $this->p->fwebsite)) {
-                $errors .= __('The website provided is not valid. Be sure to include http://', 'st-business-carry-over-legacy').'<br />';
+                $errors .= __('The website provided is not valid. Be sure to include http://', 'st-business-carry-over').'<br />';
             }
         }
 
         if (intval($this->p->fconfirm1) == 1 || intval($this->p->fconfirm3) == 1) {
-            $errors .= __('You have triggered our anti-spam system. Please try again. Code 001.', 'st-business-carry-over-legacy').'<br />';
+            $errors .= __('You have triggered our anti-spam system. Please try again. Code 001.', 'st-business-carry-over').'<br />';
         }
 
         if (intval($this->p->fconfirm2) != 1) {
-            $errors .= __('You have triggered our anti-spam system. Please try again. Code 002', 'st-business-carry-over-legacy').'<br />';
+            $errors .= __('You have triggered our anti-spam system. Please try again. Code 002', 'st-business-carry-over').'<br />';
         }
 
         if ($this->p->frating < 1 || $this->p->frating > 5) {
-            $errors .= __('You have triggered our anti-spam system. Please try again. Code 003', 'st-business-carry-over-legacy').'<br />';
+            $errors .= __('You have triggered our anti-spam system. Please try again. Code 003', 'st-business-carry-over').'<br />';
         }
 
        if (strlen(trim($this->p->ftext)) < 5) {
-            $errors .= __('You must include a review. Please make reviews at least 5 letters.', 'st-business-carry-over-legacy').'<br />';
+            $errors .= __('You must include a review. Please make reviews at least 5 letters.', 'st-business-carry-over').'<br />';
         }
 
         /* returns true for errors */
@@ -876,23 +876,23 @@ function shortcode_smar_insert() {
 		$smartestb_options = get_option('smartestb_options');
 		$bn = stripslashes_deep($smartestb_options['smartestb_business_name']);if(!$bn) {$bn = get_bloginfo('name'); }
         $admin_linkpre = get_admin_url().'admin.php?page=smar_view_reviews';
-        $admin_link = sprintf(__('Link to admin approval page: %s', 'st-business-carry-over-legacy'), $admin_linkpre);
-		$ac = sprintf(__('A new review has been posted on %1$s\'s website.','st-business-carry-over-legacy'),$bn) . "\n\n" .
-	__('You will need to login to the admin area and approve this review before it will appear on your site.','st-business-carry-over-legacy') . "\n\n" .$admin_link;
+        $admin_link = sprintf(__('Link to admin approval page: %s', 'st-business-carry-over'), $admin_linkpre);
+		$ac = sprintf(__('A new review has been posted on %1$s\'s website.','st-business-carry-over'),$bn) . "\n\n" .
+	__('You will need to login to the admin area and approve this review before it will appear on your site.','st-business-carry-over') . "\n\n" .$admin_link;
 
-        @wp_mail(get_bloginfo('admin_email'), $bn.': '. sprintf(__('New Review Posted on %1$s', 'st-business-carry-over-legacy'), 
+        @wp_mail(get_bloginfo('admin_email'), $bn.': '. sprintf(__('New Review Posted on %1$s', 'st-business-carry-over'), 
 								date('m/d/Y h:i e') ), $ac );
 
         /* returns false for no error */
-        return array(false, '<div>'.__('Thank you for your comments. All submissions are moderated and if approved, yours will appear soon.', 'st-business-carry-over-legacy').'</div>');
+        return array(false, '<div>'.__('Thank you for your comments. All submissions are moderated and if approved, yours will appear soon.', 'st-business-carry-over').'</div>');
     }
     function smar_redirect($url, $cookie = array()) {
         $headers_sent = headers_sent();
         if ($headers_sent == true) {
             /* use JS redirect and add cookie before redirect */
             /* we do not html comment script blocks here - to prevent any issues with other plugins adding content to newlines, etc */
-            $out = '<html><head><title>'.__('Redirecting', 'st-business-carry-over-legacy').'...</title></head><body><div style="clear:both;text-align:center;padding:10px;">' .
-                    __('Processing... Please wait...', 'st-business-carry-over-legacy') .
+            $out = '<html><head><title>'.__('Redirecting', 'st-business-carry-over').'...</title></head><body><div style="clear:both;text-align:center;padding:10px;">' .
+                    __('Processing... Please wait...', 'st-business-carry-over') .
                     '<script type="text/javascript">';
             foreach ($cookie as $col => $val) {
                 $val = preg_replace("/\r?\n/", "\\n", addslashes($val));
@@ -935,15 +935,15 @@ function shortcode_smar_insert() {
 				wp_enqueue_style('smartest-reviews');
 		        wp_enqueue_script('smartest-reviews');
 				$loc = array(
-					'hidebutton' => __('Click here to hide form', 'st-business-carry-over-legacy'),
-					'email' => __('The email address provided is not valid.', 'st-business-carry-over-legacy'),
-					'name' => __('You must include your ', 'st-business-carry-over-legacy'),
-					'review' => __('You must include a review. Please make reviews at least 4 letters.', 'st-business-carry-over-legacy'),
-					'human' => __('You must confirm that you are human.', 'st-business-carry-over-legacy'),
-					'code2' => __('Code 2.', 'st-business-carry-over-legacy'),
-					'code3' => __('Code 3.', 'st-business-carry-over-legacy'),
-					'rating' => __('Please select a star rating from 1 to 5.', 'st-business-carry-over-legacy'),
-					'website' => __('The website provided is not valid. Be sure to include', 'st-business-carry-over-legacy')
+					'hidebutton' => __('Click here to hide form', 'st-business-carry-over'),
+					'email' => __('The email address provided is not valid.', 'st-business-carry-over'),
+					'name' => __('You must include your ', 'st-business-carry-over'),
+					'review' => __('You must include a review. Please make reviews at least 4 letters.', 'st-business-carry-over'),
+					'human' => __('You must confirm that you are human.', 'st-business-carry-over'),
+					'code2' => __('Code 2.', 'st-business-carry-over'),
+					'code3' => __('Code 3.', 'st-business-carry-over'),
+					'rating' => __('Please select a star rating from 1 to 5.', 'st-business-carry-over'),
+					'website' => __('The website provided is not valid. Be sure to include', 'st-business-carry-over')
 					);
 				wp_localize_script( 'smartest-reviews', 'smartlocal', $loc);
 			}
