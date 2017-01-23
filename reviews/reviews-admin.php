@@ -267,11 +267,22 @@ class SMARTESTReviewsLegacyAdmin
                             if ($this->options['ask_custom'][$i] == 1) { $caf = 'checked'; } else { $caf = ''; }
                             if ($this->options['require_custom'][$i] == 1) { $crf = 'checked'; } else { $crf = ''; }
                             if ($this->options['show_custom'][$i] == 1) { $csf = 'checked'; } else { $csf = ''; }
+
+                            $custom_field_value = empty( $this->options['field_custom'][$i] ) ? '' : $this->options['field_custom'][$i];
+
                             echo '
-                            <label for="field_custom'.$i.'">'. __('Field Name: ', 'st-business-carry-over'). '</label><input id="field_custom'.$i.'" name="field_custom['.$i.']" type="text" value="'.$this->options['field_custom'][$i].'" />&nbsp;&nbsp;&nbsp;
-                            <input '.$caf.' class="custom_ask" data-id="'.$i.'" id="ask_custom'.$i.'" name="ask_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="ask_custom'.$i.'">'. __('Ask', 'st-business-carry-over'). '</label>&nbsp;&nbsp;&nbsp;
-                            <input '.$crf.' class="custom_req" data-id="'.$i.'" id="require_custom'.$i.'" name="require_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="require_custom'.$i.'">'. __('Require', 'st-business-carry-over'). '</label>&nbsp;&nbsp;&nbsp;
-                            <input '.$csf.' class="custom_show" data-id="'.$i.'" id="show_custom'.$i.'" name="show_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="show_custom'.$i.'">'. __('Show', 'st-business-carry-over'). '</label><br />
+                            <label for="field_custom'.$i.'">'.
+                            __('Field Name: ', 'st-business-carry-over').
+                            '</label><input id="field_custom'.$i.'" name="field_custom['.$i.']" type="text" value="' . $custom_field_value .
+                            '" />&nbsp;&nbsp;&nbsp;
+                            <input '.$caf.' class="custom_ask" data-id="'.$i.
+                            '" id="ask_custom'.$i.'" name="ask_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="ask_custom'.$i.'">'.
+                            __('Ask', 'st-business-carry-over').
+                            '</label>&nbsp;&nbsp;&nbsp;
+                            <input '.$crf.' class="custom_req" data-id="'.$i.'" id="require_custom'.$i.'" name="require_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="require_custom'.$i.'">'.
+                            __('Require', 'st-business-carry-over'). '</label>&nbsp;&nbsp;&nbsp;
+                            <input '.$csf.' class="custom_show" data-id="'.$i.'" id="show_custom'.$i.'" name="show_custom['.$i.']" type="checkbox" value="1" />&nbsp;<label for="show_custom'.$i.'">'.
+                            __('Show', 'st-business-carry-over'). '</label><br />
                             ';
                         }
                         echo '
