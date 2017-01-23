@@ -3,7 +3,7 @@
 Plugin Name: ST Business Carry Over
 Plugin URI: https://isabelcastillo.com/docs/st-business-carry-over
 Description: Carry over your staff, announcements, services, and reviews from your Smartest Themes to any WordPress theme.
-Version: 1.1.alpha1
+Version: 1.1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
