@@ -2,7 +2,7 @@
 /**
  * Adds Smartest Reviews Testimonial widget
  *
- * @package		ST Business Carry Over Legacy
+ * @package		ST Business Carry Over
  * @subpackage 	Smartest Reviews Module
  * @extends 	WP_Widget
  * @author		Smartest Themes <isa@smartestthemes.com>

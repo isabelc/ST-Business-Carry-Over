@@ -3,7 +3,7 @@
  * Get reviews from visitors, and aggregate ratings and stars for your business in search results.
  * Includes Testimonial widget. 
  * 
- * @package		ST Business Carry Over Legacy
+ * @package		ST Business Carry Over
  * @subpackage	Smartest Reviews Module
  * @author		Smartest Themes <isa@smartestthemes.com>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License

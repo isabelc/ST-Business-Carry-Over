@@ -2,7 +2,7 @@
 /**
  * Smartest Reviews Admin Interface
  * 
- * @package		ST Business Carry Over Legacy
+ * @package		ST Business Carry Over
  * @subpackage	Smartest Reviews Module
  * @author		Smartest Themes <isa@smartestthemes.com>
  * @license		http://opensource.org/licenses/gpl-license.php GNU Public License

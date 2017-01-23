@@ -7,7 +7,7 @@ Version: 1.1.alpha1
 Author: Isabel Castillo
 Author URI: https://isabelcastillo.com
 License: GPL2
-Text Domain: st-business-carry-over-legacy
+Text Domain: st-business-carry-over
 Domain Path: languages
 Copyright 2014-2017 Isabel Castillo
 
@@ -25,7 +25,7 @@ along with ST Business Carry Over; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-class ST_Business_Carry_Over_Legacy{
+class ST_Business_Carry_Over{
 	private static $instance = null;
 
 	public static function get_instance() {
@@ -37,8 +37,8 @@ class ST_Business_Carry_Over_Legacy{
 
 	private function __construct() {
 		
-		if( ! defined('STBUSCARRYOVERLEGACY_PATH')) {
-			define( 'STBUSCARRYOVERLEGACY_PATH', plugin_dir_path(__FILE__) );
+		if( ! defined('STBUSINESSCARRYOVER_PATH')) {
+			define( 'STBUSINESSCARRYOVER_PATH', plugin_dir_path(__FILE__) );
 		}
 
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -105,7 +105,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		load_plugin_textdomain( 'st-business-carry-over', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		
-		include STBUSCARRYOVERLEGACY_PATH . 'options.php';
+		include STBUSINESSCARRYOVER_PATH . 'options.php';
 		add_action( 'init', 'stbcol_options' );
 	}
 	
@@ -173,7 +173,7 @@ class ST_Business_Carry_Over_Legacy{
 	public function add_admin() {
 		global $query_string;
 
-		$pagename = 'st-carryover-legacy-settings';
+		$pagename = 'st-carryover-settings';
 		
 		if ( isset($_REQUEST['page']) && $pagename == $_REQUEST['page'] ) {
 			if (isset($_REQUEST['smartestthemes_save']) && 'reset' == $_REQUEST['smartestthemes_save']) {
@@ -188,7 +188,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		$icon = plugins_url( 'images/smartestthemes-icon.png' , __FILE__ );
 		
-		$sto=add_menu_page( __( 'ST Business Carry Over Legacy Options', 'st-business-carry-over' ), __('Business Carry Over Options', 'st-business-carry-over' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 68.9);
+		$sto=add_menu_page( __( 'ST Business Carry Over Options', 'st-business-carry-over' ), __('Business Carry Over Options', 'st-business-carry-over' ), 'activate_plugins', $pagename, array($this, 'options_page'), $icon, 68.9);
 		
 		add_action( 'admin_head-'. $sto, array( $this, 'frame_load' ));
 		
@@ -238,7 +238,7 @@ class ST_Business_Carry_Over_Legacy{
 		
 		//When Theme Options page is reset - Add the smartestb_options option
 
-		if ( $page == 'st-carryover-legacy-settings' ) {
+		if ( $page == 'st-carryover-settings' ) {
 			$query_inner .= " OR option_name = 'smartestb_options'";
 		}
 		$query = "DELETE FROM $wpdb->options WHERE $query_inner";
@@ -407,7 +407,7 @@ class ST_Business_Carry_Over_Legacy{
 		$reviews = empty($options['smartestb_add_reviews']) ? '' : $options['smartestb_add_reviews'];
 	
 		if (!class_exists('SMARTESTReviewsLegacy') && ($reviews == 'true')) {
-			include_once STBUSCARRYOVERLEGACY_PATH . 'reviews/reviews.php';
+			include_once STBUSINESSCARRYOVER_PATH . 'reviews/reviews.php';
 		}
 		
 		if ( $reviews == 'true' ) {
@@ -611,7 +611,7 @@ class ST_Business_Carry_Over_Legacy{
 	 */
 	function init_meta_boxes() {
 		if ( ! class_exists( 'stbcol_Meta_Box' ) )
-			require_once STBUSCARRYOVERLEGACY_PATH . 'metabox/init.php';
+			require_once STBUSINESSCARRYOVER_PATH . 'metabox/init.php';
 	}
 	
 	/**
@@ -640,8 +640,8 @@ class ST_Business_Carry_Over_Legacy{
 		
 		if( $news == 'true'  ) { 
 		
-			include STBUSCARRYOVERLEGACY_PATH . 'widgets/announcements.php';
-			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-announcements.php';
+			include STBUSINESSCARRYOVER_PATH . 'widgets/announcements.php';
+			include STBUSINESSCARRYOVER_PATH . 'widgets/featured-announcements.php';
 		
 			register_widget('SmartestAnnouncements_Legacy');
 			register_widget('SmartestFeaturedAnnounceLegacy');
@@ -649,8 +649,8 @@ class ST_Business_Carry_Over_Legacy{
 		}
 		if( $svcs == 'true'  ) { 
 		
-			include STBUSCARRYOVERLEGACY_PATH . 'widgets/all-services.php';
-			include STBUSCARRYOVERLEGACY_PATH . 'widgets/featured-services.php';		
+			include STBUSINESSCARRYOVER_PATH . 'widgets/all-services.php';
+			include STBUSINESSCARRYOVER_PATH . 'widgets/featured-services.php';		
 		
 			register_widget('SmartestServices_Legacy'); 
 			register_widget('SmartestFeaturedServicesLegacy');
@@ -658,7 +658,7 @@ class ST_Business_Carry_Over_Legacy{
 		}
 		if( $staff == 'true' ) {
 		
-			include STBUSCARRYOVERLEGACY_PATH . 'widgets/staff.php';
+			include STBUSINESSCARRYOVER_PATH . 'widgets/staff.php';
 			register_widget('SmartestStaff_Legacy');
 		
 		}
@@ -817,7 +817,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 			echo apply_filters('smartestthemes_backend_branding', '<img alt="Smartest Themes" src="'. $image_dir. 'st_logo_admin.png" />'); ?>
 			  </div>
 				 <div class="theme-info">
-					<span class="theme" style="margin-top:10px;">ST Business Carry Over Legacy
+					<span class="theme" style="margin-top:10px;">ST Business Carry Over
 							<span class="ver"> <?php printf(__('version %s', 'st-business-carry-over'), $version); ?>
 	</span>						
 					</span>
@@ -963,7 +963,7 @@ function smar_manage_staff_columns( $column, $post_id ) {
 						var ajax_url = '<?php echo admin_url("admin-ajax.php"); ?>';
 						var data = {
 							<?php 
-							if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'st-carryover-legacy-settings' ){
+							if(isset($_REQUEST['page']) && $_REQUEST['page'] == 'st-carryover-settings' ){
 								?>
 								type: 'options',
 								<?php
@@ -1265,5 +1265,5 @@ function smar_manage_staff_columns( $column, $post_id ) {
 	
 } // end class
 
-register_activation_hook(__FILE__, array('ST_Business_Carry_Over_Legacy', 'activate'));
-$ST_Business_Carry_Over_Legacy = ST_Business_Carry_Over_Legacy::get_instance();
+register_activation_hook(__FILE__, array('ST_Business_Carry_Over', 'activate'));
+$ST_Business_Carry_Over = ST_Business_Carry_Over::get_instance();

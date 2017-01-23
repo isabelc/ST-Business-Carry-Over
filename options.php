@@ -1,6 +1,6 @@
 <?php
 /**
-* The plugin options for ST Business Carry Over Legacy
+* The plugin options for ST Business Carry Over
 */
 function stbcol_options(){
 
